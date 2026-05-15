@@ -5,3 +5,7 @@
 tags
 node_modules
 __pycache__
+
+# Claude Code — local per-machine state
+.claude/settings.local.json
+.claude/scope-card.json

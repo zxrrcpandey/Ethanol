@@ -1,0 +1,285 @@
+{
+  "feature_locks": {
+    "MR_FULL": {
+      "name": "Material Request \u2014 Full DocType",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "MR approval chain, naming, status defaults, and warehouse-guard all production-stable through v2.10.0.5 (from_warehouse hidden-field clear on non-Transfer MRs)",
+      "protected_files": [
+        "ts_po_approval.py (MR sections: _submit_mr_for_approval, _approve_mr, _get_mr_approval_context, _validate_user_can_act_on_mr, mr_before_save, hold_mr, resume_mr)",
+        "ts_mr_warehouse_guard.py (entire file \u2014 v2.10.0.5 before_validate guard clearing hidden from_warehouse on non-Transfer types; do not gate by flags, do not extend beyond from_warehouse / set_from_warehouse without re-running smoke T1-T5)",
+        "mr_approval.js (entire file \u2014 buttons, stepper, banners, field locking)",
+        "mr_list.js (list view indicator override)",
+        "ts_mr_naming.py (entire file \u2014 naming + counter protection)",
+        "setup.py (MR custom fields section)",
+        "seed_data.py (PROPERTY_SETTERS for ts_mr_status)"
+      ],
+      "protected_fields": [
+        "ts_mr_status (Custom Field + Property Setter options \u2014 NEVER change without full scan)",
+        "ts_mr_route, ts_mr_current_step, ts_mr_total_steps, ts_mr_submitted_by",
+        "cost_center (mandatory, reqd=1)",
+        "hold_reason, held_by, held_at_step"
+      ],
+      "regression_tests": [
+        "test 1-2 (MR create + status)",
+        "test 3 (approval context)",
+        "test 5 (status options)",
+        "test 7 (naming)"
+      ]
+    },
+    "MR_SUBMIT_BUTTON": {
+      "name": "MR \u2014 Submit for Approval Button",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Button disappeared when 'Not Submitted' default was added \u2014 status check didn't include it",
+      "protected_code": [
+        "ts_po_approval.py line 1528: can_submit_for_approval status in ('', 'Draft', 'Not Submitted')",
+        "mr_approval.js _render_mr_buttons(): ctx.can_submit_for_approval check",
+        "mr_approval.js _hide_standard_submit(): hides Frappe Submit, must NOT hide our button",
+        "seed_data.py PROPERTY_SETTERS: ts_mr_status options must include 'Not Submitted'"
+      ],
+      "if_changing": "Grep ALL Python: status in ( | Grep ALL JS: can_submit | Check Property Setter options | Run regression test #3"
+    },
+    "MR_PRINT_BUTTON": {
+      "name": "MR \u2014 Print PDF Button",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Print requires correct host_name + http_port config for wkhtmltopdf",
+      "protected_code": [
+        "mr_approval.js _ts_add_mr_print_button(): button creation + format selection dialog",
+        "mr_approval.js _hide_frappe_submit_ui(): must NOT hide print button",
+        "Print Format 'TS Material Request' + 'TS Material Request (Clean)': Jinja HTML",
+        "site_config.json: host_name must be https://...",
+        "common_site_config.json: http_port must be 443"
+      ],
+      "if_changing": "Test on demo: click Print PDF \u2192 select format \u2192 verify PDF downloads without error"
+    },
+    "MR_BANNERS": {
+      "name": "MR \u2014 Approval Banners (route info, hold reason, budget)",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Banners use custom .ts-banner DOM elements \u2014 NOT Frappe set_headline (which gets wiped on refresh)",
+      "protected_code": [
+        "mr_approval.js _show_ts_banner(): our own container after .form-dashboard-section",
+        "mr_approval.js _render_mr_status(): hold reason banner via _show_ts_banner",
+        "mr_approval.js _render_mr_info(): route/steps banner via _show_ts_banner",
+        "mr_approval.js _check_cc_budget(): budget banner inserted after cost_center field"
+      ],
+      "if_changing": "NEVER use frm.dashboard.set_headline \u2014 Frappe wipes it on every refresh. Always use _show_ts_banner."
+    },
+    "MR_FIELDS": {
+      "name": "MR \u2014 Custom Fields",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "26 custom fields on MR \u2014 approval, hold, priority, remark, delivery location",
+      "protected_items": [
+        "ts_mr_status: Select (via Property Setter) with default 'Not Submitted' \u2014 options in seed_data.py",
+        "ts_priority: Select (Low/Medium/High/Urgent)",
+        "ts_remark: Small Text",
+        "ts_delivery_location: Data on MR Item",
+        "ts_item_remark: Data on MR Item",
+        "cost_center: Link (mandatory, reqd=1)",
+        "ts_project: Link to Project",
+        "ts_username: Data",
+        "ts_department_name: Data"
+      ],
+      "if_changing": "Check setup.py custom fields section + Property Setter options + JS that reads field"
+    },
+    "PO_FULL": {
+      "name": "Purchase Order \u2014 Full DocType",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "PO approval chain with 7 rules, budget check, lifecycle tracker \u2014 production stable",
+      "protected_files": [
+        "ts_po_approval.py (PO sections: _submit_po_for_approval, _approve_po, _get_po_approval_context, po_before_save, po_on_cancel)",
+        "po_approval.js (entire file \u2014 buttons, stepper, budget indicator, lifecycle tracker)",
+        "po_list.js (list view indicator override)",
+        "setup.py (PO custom fields section)",
+        "seed_data.py (PROPERTY_SETTERS for ts_approval_status)"
+      ],
+      "regression_tests": [
+        "test 4 (PO approval context)",
+        "test 6 (PO status options)"
+      ]
+    },
+    "PO_SUBMIT_BUTTON": {
+      "name": "PO \u2014 Submit for Approval Button",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Same pattern as MR \u2014 status check must include 'Not Submitted'",
+      "protected_code": [
+        "ts_po_approval.py line 1438: can_submit_for_approval status in ('', 'Draft', 'Not Submitted')",
+        "po_approval.js _render_buttons(): ctx.can_submit_for_approval check",
+        "po_approval.js _hide_po_standard_submit(): hides Frappe Submit",
+        "seed_data.py PROPERTY_SETTERS: ts_approval_status options must include 'Not Submitted'"
+      ]
+    },
+    "PO_PRINT_BUTTON": {
+      "name": "PO \u2014 Print PDF Button",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Same wkhtmltopdf config dependency as MR",
+      "protected_code": [
+        "po_approval.js _ts_add_print_button(): button + format dialog",
+        "Print Format 'TS Purchase Order' + 'TS Purchase Order (Clean)'"
+      ]
+    },
+    "TOKEN_GRN": {
+      "name": "Token \u2014 GRN Creation",
+      "status": "UNLOCKED",
+      "locked_on": "2026-04-17",
+      "reason": "Financial \u2014 creates Purchase Receipt with per-item PO rates",
+      "protected_code": [
+        "ts_token.py create_grn(): role-restricted, idempotent, UOM conversion",
+        "ts_token.js: Create GRN button visibility"
+      ],
+      "unlocked_on": "2026-04-26",
+      "unlock_reason": "v2.9.1 cleanup \u2014 remove ts_two_pass_gates_enabled flag, make two-pass mandatory"
+    },
+    "TOKEN_EXIT": {
+      "name": "Token \u2014 Mark Exit",
+      "status": "UNLOCKED",
+      "locked_on": "2026-04-17",
+      "reason": "Creates Delivery Note for Stock OUT, updates vehicle/transport stats",
+      "protected_code": [
+        "ts_token.py mark_exit(): blocks without purpose, handles Stock IN/OUT/Gate Pass",
+        "ts_token.js: Mark Exit button"
+      ],
+      "unlocked_on": "2026-04-26",
+      "unlock_reason": "v2.9.1 cleanup \u2014 remove ts_two_pass_gates_enabled flag, make two-pass mandatory"
+    },
+    "GATE_ENTRY_SUBMIT": {
+      "name": "Gate Entry \u2014 On Submit",
+      "status": "UNLOCKED",
+      "locked_on": "2026-04-17",
+      "reason": "Copies driver to token, checks blacklist, creates material inspection",
+      "protected_code": [
+        "ts_gate_entry.py on_submit(): _check_blacklist_on_submit, _copy_vehicle_driver_to_token, _create_material_inspection"
+      ],
+      "unlocked_on": "2026-04-26",
+      "unlock_reason": "v2.9.1 cleanup \u2014 remove ts_two_pass_gates_enabled flag, make two-pass mandatory"
+    },
+    "WEIGHBRIDGE": {
+      "name": "Weighbridge Log \u2014 Weight Calculation",
+      "status": "UNLOCKED",
+      "locked_on": "2026-04-17",
+      "reason": "Net weight = gross - tare, tare %, Stock IN/OUT reversed order",
+      "protected_code": [
+        "ts_weighbridge_log.py calculate_net_weight(), update_status(), _is_stock_out()"
+      ],
+      "unlocked_on": "2026-04-26",
+      "unlock_reason": "v2.9.1 cleanup \u2014 remove ts_two_pass_gates_enabled flag, make two-pass mandatory"
+    },
+    "NAMING_COUNTERS": {
+      "name": "MR Naming \u2014 tabSeries Counters",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "3-layer duplicate protection \u2014 sync + getseries + existence check (Lesson 136)",
+      "protected_code": [
+        "ts_mr_naming.py: _get_next_unique_name, _sync_counter_with_db, _get_next_serial \u2014 ENTIRE FILE"
+      ]
+    },
+    "SERVER_CONFIG": {
+      "name": "Server Configuration",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Wrong config causes 403 for all users or session flush",
+      "protected_settings": [
+        "common_site_config.json: restart_supervisor_on_update = false (NEVER true)",
+        "common_site_config.json: live_reload = false (NEVER true)",
+        "common_site_config.json: http_port = 443",
+        "site_config.json: developer_mode = 0 (NEVER 1)",
+        "site_config.json: host_name = https://... (required for Print PDF)"
+      ],
+      "if_changing": "NEVER change these. If bench update resets them, fix immediately."
+    },
+    "MR_REVISION_REQUEST_BUTTON": {
+      "name": "MR \u2014 Request Revision Button (Feature 29)",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Post-approval soft-revise path for submitted MRs. Blocks if any PO was created. Sends notification, does NOT change state. Shipped after 17/17 regression + 12/12 live-test PASS.",
+      "protected_code": [
+        "ts_mr_post_approval_revision.py (entire file ~250 lines): request_mr_revision, _check_po_linkage, _log_revision, _notify_creator",
+        "mr_approval.js _maybe_add_post_approval_revision_button() (~120 lines)",
+        "Unique jQuery class 'bbf-mr-rev-req-btn' \u2014 DO NOT reuse. '.bbf-mr-btn' .remove() would kill it"
+      ],
+      "protected_fields": [
+        "TS Approval Log action='Revised' + comment prefix '[POST-APPROVAL]' (Lesson 159)"
+      ],
+      "if_changing": "Check Lesson 164 (unique class), Lesson 159 (fixed action options), Lesson 160 (MR grand_total SUM)"
+    },
+    "PO_MR_GATE_FIELD_GUARD": {
+      "name": "PO/MR \u2014 Gate-Field Tamper Guard (Security #14)",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Custom Field permlevel=0 on control-plane fields was exploitable via frappe.client.set_value REST API. Attacker with PO/MR write perm could flip approval state. Fix: _block_gate_field_tampering() in before_save. Admin + SM bypass only. Lesson 162. Verified 7/7 exploit attempts blocked.",
+      "protected_code": [
+        "ts_po_approval.py _block_gate_field_tampering(doc, gate_fields) \u2014 helper function",
+        "ts_po_approval.py po_before_save \u2014 calls guard for 12 PO gate fields",
+        "ts_po_approval.py mr_before_save \u2014 calls guard for 8 MR gate fields"
+      ],
+      "protected_fields": [
+        "PO: ts_approval_status, ts_current_step, ts_self_skip_impossible, ts_amount_at_submission, ts_submitted_by, ts_submitted_at, ts_approved_by, ts_approved_at, ts_rejected_by, ts_rejection_reason, ts_final_approved_by, ts_approval_route",
+        "MR: ts_mr_status, ts_mr_route, ts_mr_current_step, ts_mr_total_steps, ts_mr_submitted_by, hold_reason, held_by, held_at_step"
+      ],
+      "if_changing": "Lesson 162 \u2014 keep Admin + SM bypass only. Verify via REST set_value attempt as non-admin user \u2192 must return 'Field X is locked by the approval system'"
+    },
+    "BUDGET_CEO_OVERRIDE": {
+      "name": "Budget \u2014 ceo_budget_override (Security #7)",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "ceo_budget_override was CEO + SM only \u2014 added MD. Uses frappe.PermissionError (HTTP 403). Adds doc.add_comment audit trail with escaped reason.",
+      "protected_code": [
+        "ts_gate_entry/ts_budget.py process_budget_override \u2014 role check must be {CEO, Managing Director, System Manager, Administrator}",
+        "doc.add_comment(comment_type='Info', text=f'CEO override applied by {frappe.session.user}: {escape(reason)}')"
+      ],
+      "if_changing": "Never broaden the role list. Always keep audit comment. Reason must be HTML-escaped."
+    },
+    "GATE_ENTRY_DRAFT_OPS": {
+      "name": "TS Gate Entry \u2014 Draft Operations (Print + Post-Dated)",
+      "status": "LOCKED",
+      "locked_on": "2026-05-16",
+      "reason": "Print PDF button on drafts + post-dated banner frm.is_new() gate + pre-enable max_backdate_days clamping. Fixes Lesson 166 (frm.is_new vs !docstatus silently unlocking 197 tokens) + Lesson 167 Security #15.",
+      "protected_code": [
+        "ts_gate_entry.js _ts_add_gate_entry_print_button() \u2014 standalone print button",
+        "ts_post_dated.js \u2014 uses frm.is_new() NOT !frm.doc.docstatus for banner/unlock",
+        "ts_post_dated.py check_post_dated_access() \u2014 clamps pre-enable range to max_backdate_days",
+        "ts_post_dated.py validate_post_dated_date() \u2014 belt-and-suspenders on each save",
+        "ts_settings.py TSSettings.validate() \u2014 blocks saving a too-wide pre-enable window",
+        "ts_settings.py: has_value_changed guard (Lesson 170) so unrelated edits don't trigger policy rejection"
+      ],
+      "if_changing": "Lesson 166, 167, 170 must be re-read. Verify on demo: saved draft does NOT auto-unlock date/time fields; pre-enable config >30 days is blocked on save; backdating beyond max_backdate_days is rejected on Token/Gate Entry save."
+    }
+  },
+  "lock_history": [],
+  "unlock_procedure": {
+    "step_1": "User explicitly says 'unlock [feature name]'",
+    "step_2": "Run test_regression.py on demo \u2014 must be 100% BEFORE any change",
+    "step_3": "Show user which files/code will be affected",
+    "step_4": "Make the change on demo only",
+    "step_5": "Run test_regression.py AGAIN \u2014 must be 100% AFTER change",
+    "step_6": "User tests on demo manually",
+    "step_7": "Re-lock the feature with updated date and reason",
+    "step_8": "Only deploy to production when user says"
+  },
+  "rules": {
+    "before_any_edit": "Check locks.json \u2014 if ANY protected file/code is affected, STOP and ask user",
+    "before_deploy": "Run test_regression.py \u2014 100% pass required, no exceptions",
+    "never_on_production": "bench clear-cache, bench set-config developer_mode 1, bench set-config -g restart_supervisor_on_update true"
+  },
+  "regression_config": {
+    "test_path": "<TODO: Ethanol demo test_regression.py path>",
+    "required_pass_count": "17/17",
+    "command_demo": "<TODO: set up Ethanol demo SSH + bench path>",
+    "run_before": "MANDATORY before unlock + before any edit session on a locked file",
+    "run_after": "MANDATORY after every change to a locked file, before re-lock",
+    "on_failure": "Revert the change. Any regression test that passed BEFORE and fails AFTER = a break."
+  },
+  "verification": {
+    "verify_all_command": "python3 .claude/hooks/verify-locks.py",
+    "verify_specific_command": "python3 .claude/hooks/verify-locks.py <KEY1> <KEY2>",
+    "unlock_command": "bash .claude/hooks/unlock.sh <KEY> \"<reason>\"",
+    "relock_command": "bash .claude/hooks/relock.sh <KEY> \"<reason>\"",
+    "description": "verify-locks.py scans every LOCKED feature: checks files exist, protected identifiers present in referenced files, fields still exist in setup.py/seed_data.py. Run BEFORE unlock to confirm baseline, AFTER relock to catch drift."
+  }
+}
