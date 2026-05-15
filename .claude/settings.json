@@ -6,8 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-production.sh\"",
-            "statusMessage": "Checking production protection..."
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-production.sh\""
           }
         ]
       },
@@ -16,13 +15,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scope-check.sh\"",
-            "statusMessage": "Scope Card: checking scope-card.json discipline..."
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scope-check.sh\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/lock-check.sh\"",
-            "statusMessage": "Guardian: checking feature locks..."
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/lock-check.sh\""
           }
         ]
       }
@@ -32,8 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/governance-reminder.sh\"",
-            "statusMessage": "Loading BBF agent governance rules..."
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/governance-reminder.sh\""
           }
         ]
       }
