@@ -4,8 +4,8 @@ Prefix based on MR Purpose (material_request_type):
   Purchase        → PR
   Service Request → SR
   Fixed Asset     → FA
-  Material Transfer → BBPL-TRAN
-  Material Issue    → BBPL-ISSU
+  Material Transfer → Trustbit-TRAN
+  Material Issue    → Trustbit-ISSU
 
 CC Code from Cost Center's cc_code custom field.
 Year is 2-digit. Serial is 5-digit, per prefix+cc_code+year.
@@ -20,8 +20,8 @@ PURPOSE_PREFIX = {
 	"Purchase": "PR",
 	"Service Request": "SR",
 	"Fixed Asset": "FA",
-	"Material Transfer": "BBPL-TRAN",
-	"Material Issue": "BBPL-ISSU",
+	"Material Transfer": "Trustbit-TRAN",
+	"Material Issue": "Trustbit-ISSU",
 }
 
 # Maximum retries to find a non-duplicate name
@@ -68,7 +68,7 @@ def mr_autoname(doc, method=None):
 def mr_before_insert(doc, method=None):
 	"""Fallback: if autoname didn't fire (naming_series took priority),
 	override the name here before insert."""
-	if doc.name and doc.name.startswith(("PR-", "SR-", "FA-", "BBPL-TRAN-", "BBPL-ISSU-")):
+	if doc.name and doc.name.startswith(("PR-", "SR-", "FA-", "Trustbit-TRAN-", "Trustbit-ISSU-")):
 		return  # autoname already set the name correctly
 
 	# autoname didn't fire — generate name now

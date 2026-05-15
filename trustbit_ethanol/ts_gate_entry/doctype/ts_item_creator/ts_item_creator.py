@@ -103,7 +103,7 @@ class TSItemCreator(Document):
 		frappe.clear_document_cache("TS Item Code Settings", "TS Item Code Settings")
 		settings = frappe.get_doc("TS Item Code Settings")
 
-		# Fixed Asset format always uses 5 serial digits (FA-BBPL-25-26-00001)
+		# Fixed Asset format always uses 5 serial digits (FA-Trustbit-25-26-00001)
 		is_asset = self.creation_type == "Fixed Asset"
 		digits = 5 if is_asset else max(int(settings.serial_digits or 3), 2)
 		sep = settings.default_separator or "-"

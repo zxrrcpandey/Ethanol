@@ -2,8 +2,8 @@
 //
 // v2.9.0.6 (Bug 11.F): Auto-default item row Cost Center from parent MR's CC.
 // Previously item rows inherited cost_center from Item.default_cost_center
-// (often "Main - BBPL"), causing User Permission errors for users restricted
-// to specific CCs (e.g. Capex - BBPL only). Now row CC always matches parent.
+// (often "Main - Trustbit"), causing User Permission errors for users restricted
+// to specific CCs (e.g. Capex - Trustbit only). Now row CC always matches parent.
 frappe.ui.form.on("Material Request Item", {
 	items_add(frm, cdt, cdn) {
 		// When a new row is added, immediately default cost_center to parent MR's CC
@@ -94,7 +94,7 @@ frappe.ui.form.on("Material Request", {
 		if (!frm.doc.cost_center) return;
 		// v2.9.0.6 (Bug 11.F): propagate parent CC to all existing item rows
 		// so user doesn't hit User Permission errors mid-form when item rows
-		// inherited a different (Item.default_cost_center) CC like "Main - BBPL".
+		// inherited a different (Item.default_cost_center) CC like "Main - Trustbit".
 		(frm.doc.items || []).forEach(row => {
 			if (row.cost_center !== frm.doc.cost_center) {
 				frappe.model.set_value(row.doctype, row.name, "cost_center", frm.doc.cost_center);
@@ -906,14 +906,14 @@ function _ts_add_mr_print_button(frm) {
 
 	// Standalone print button (not inside Actions)
 	frm.add_custom_button(__("🖨 Print PDF"), () => {
-		// v2.9.8.34: BBPL Material Request added as the new default format.
-		const formats = ["BBPL Material Request", "TS Material Request", "TS Material Request (Clean)"];
+		// v2.9.8.34: Trustbit Material Request added as the new default format.
+		const formats = ["Trustbit Material Request", "TS Material Request", "TS Material Request (Clean)"];
 		frappe.prompt({
 			fieldtype: "Select",
 			label: "Print Format",
 			fieldname: "format",
 			options: formats.join("\n"),
-			default: "BBPL Material Request",
+			default: "Trustbit Material Request",
 			reqd: 1,
 		}, (values) => {
 			const url = `/api/method/frappe.utils.print_format.download_pdf?doctype=Material%20Request&name=${encodeURIComponent(frm.doc.name)}&format=${encodeURIComponent(values.format)}&no_letterhead=0`;

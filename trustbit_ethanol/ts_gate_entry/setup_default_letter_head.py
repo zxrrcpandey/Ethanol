@@ -1,9 +1,9 @@
 # v2.9.11.2 — Default Letter Head seeder
-# Idempotent: ensures a "BBPL" Letter Head record exists with is_default=1.
-# On prod: no-op (BBPL already is_default=1 since 2026-04 manual setup).
+# Idempotent: ensures a "Trustbit" Letter Head record exists with is_default=1.
+# On prod: no-op (Trustbit already is_default=1 since 2026-04 manual setup).
 # On demo: creates the record fresh (demo currently has only LH-Top).
 #
-# The record uses source="Image" with image=/files/BBPL-LH.png so the existing
+# The record uses source="Image" with image=/files/Trustbit-LH.png so the existing
 # letterhead asset on prod (and any uploaded copy on demo) is referenced. If
 # the image file is absent, Frappe still renders the wrapper (no broken layout).
 #
@@ -12,14 +12,14 @@
 import frappe
 
 
-BBPL_LETTER_HEAD_NAME = "BBPL"
-BBPL_IMAGE_PATH = "/files/BBPL-LH.png"
-BBPL_CONTENT = (
+TRUSTBIT_LETTER_HEAD_NAME = "Trustbit"
+TRUSTBIT_IMAGE_PATH = "/files/Trustbit-LH.png"
+TRUSTBIT_CONTENT = (
     '<div style="text-align: left;">'
-    '<img src="/files/BBPL-LH.png" alt="BBPL">'
+    '<img src="/files/Trustbit-LH.png" alt="Trustbit">'
     "</div>"
 )
-BBPL_FOOTER = (
+TRUSTBIT_FOOTER = (
     '<div style="text-align: center;font-size:10px;">'
     '<p style="margin: 0;"><strong>'
     "Kindly dispatch your original documents to our office<br>"
@@ -29,42 +29,42 @@ BBPL_FOOTER = (
 
 
 def seed_default_letter_head():
-    """Idempotent. Ensures BBPL Letter Head exists and is the system default.
+    """Idempotent. Ensures Trustbit Letter Head exists and is the system default.
 
     - Creates record on demo (where it's missing).
     - Updates is_default flag if not already set (no-op on prod).
     - Clears is_default=1 on any other Letter Head so the unique-default
-      invariant is preserved before flipping BBPL on (prevents Frappe's
-      validate hook from silently demoting BBPL).
+      invariant is preserved before flipping Trustbit on (prevents Frappe's
+      validate hook from silently demoting Trustbit).
     """
     if frappe.flags.in_install or frappe.flags.in_test:
         return
 
-    if frappe.db.exists("Letter Head", BBPL_LETTER_HEAD_NAME):
-        _ensure_is_default(BBPL_LETTER_HEAD_NAME)
+    if frappe.db.exists("Letter Head", TRUSTBIT_LETTER_HEAD_NAME):
+        _ensure_is_default(TRUSTBIT_LETTER_HEAD_NAME)
         return
 
     # Create on demo (or any site missing the record)
     doc = frappe.get_doc(
         {
             "doctype": "Letter Head",
-            "letter_head_name": BBPL_LETTER_HEAD_NAME,
+            "letter_head_name": TRUSTBIT_LETTER_HEAD_NAME,
             "source": "Image",
             "align": "Left",
-            "image": BBPL_IMAGE_PATH,
-            "content": BBPL_CONTENT,
-            "footer": BBPL_FOOTER,
+            "image": TRUSTBIT_IMAGE_PATH,
+            "content": TRUSTBIT_CONTENT,
+            "footer": TRUSTBIT_FOOTER,
             "disabled": 0,
         }
     )
     # after_migrate runs as Administrator; bypass needed for fresh-site seed
     doc.flags.ignore_permissions = True
     doc.insert()
-    _ensure_is_default(BBPL_LETTER_HEAD_NAME)
+    _ensure_is_default(TRUSTBIT_LETTER_HEAD_NAME)
 
 
 def _ensure_is_default(name):
-    """Atomically clear other defaults then set BBPL=1. Idempotent."""
+    """Atomically clear other defaults then set Trustbit=1. Idempotent."""
     current = frappe.db.get_value("Letter Head", name, "is_default")
     if current:
         return

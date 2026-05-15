@@ -18,7 +18,7 @@ import sys
 import os
 
 # Auto-detect site
-SITE = os.environ.get("FRAPPE_SITE") or "betulbiofuel.mkasystem.com"
+SITE = os.environ.get("FRAPPE_SITE") or "trustbitbiofuel.mkasystem.com"
 
 frappe.init(site=SITE)
 frappe.connect()
@@ -53,7 +53,7 @@ def test_mr_create():
     # (avoids fixture _Test companies sorting first; avoids group-company mismatch)
     wh_row = frappe.db.sql(
         "SELECT name, company FROM `tabWarehouse` WHERE is_group=0 AND name LIKE %s LIMIT 1",
-        ("%BBPL%",), as_dict=True,
+        ("%Trustbit%",), as_dict=True,
     )
     if not wh_row:
         wh_row = frappe.db.sql(
@@ -85,7 +85,7 @@ def test_mr_naming():
     if not cleanup:
         return
     name = cleanup[-1][1]
-    assert name.startswith(("PR-", "SR-", "FA-", "BBPL-", "MAT-")), f"Bad MR name: {name}"
+    assert name.startswith(("PR-", "SR-", "FA-", "Trustbit-", "MAT-")), f"Bad MR name: {name}"
 
 test("MR naming format", test_mr_naming)
 
@@ -114,7 +114,7 @@ def test_po_approval_context():
     # Pick warehouse first, derive company from it — guarantees consistency
     wh_row = frappe.db.sql(
         "SELECT name, company FROM `tabWarehouse` WHERE is_group=0 AND name LIKE %s LIMIT 1",
-        ("%BBPL%",), as_dict=True,
+        ("%Trustbit%",), as_dict=True,
     )
     if not wh_row:
         wh_row = frappe.db.sql(
@@ -189,7 +189,7 @@ def test_naming_counter_sync():
     """tabSeries counters match actual max MR numbers"""
     prefixes = frappe.db.sql(
         "SELECT DISTINCT CONCAT(SUBSTRING_INDEX(name, '-', -2)) FROM `tabMaterial Request` "
-        "WHERE name REGEXP '^(PR|SR|FA|BBPL)-'", pluck="name"
+        "WHERE name REGEXP '^(PR|SR|FA|Trustbit)-'", pluck="name"
     )
     # Check a simpler way — just verify no duplicate exists
     dups = frappe.db.sql(
@@ -280,7 +280,7 @@ print("\n[8/10] Workspaces")
 
 def test_workspaces():
     """Key workspaces exist"""
-    workspaces = ["BBPL Ethanol", "Dashboards"]
+    workspaces = ["Trustbit Ethanol", "Dashboards"]
     for ws in workspaces:
         assert frappe.db.exists("Workspace", ws), f"Workspace '{ws}' missing"
 

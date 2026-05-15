@@ -397,7 +397,7 @@ class TSWeighbridgeLog(Document):
 			# bulk import, or hardware feed that posts both weights together),
 			# mirror the tare state to Token too. Without this the Token
 			# would be stuck at 'Gross Weighed' and Stores Receiving Dashboard
-			# wouldn't pick it up — exactly the BBPL-TKN-2026-00309 incident.
+			# wouldn't pick it up — exactly the Trustbit-TKN-2026-00309 incident.
 			#
 			# Gated by the SAME flow conditions update_status() uses for the
 			# Awaiting-Tare transition (v2.8 flag ON OR Non-RM weighing OR

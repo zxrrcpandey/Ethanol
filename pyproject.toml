@@ -3,7 +3,7 @@ name = "trustbit_ethanol"
 authors = [
     { name = "Trustbit Software", email = "info@trustbit.com"}
 ]
-description = "Custom ERPNext app for Betul Bio Fuel Pvt Ltd - Ethanol Division"
+description = "Custom ERPNext app for Trustbit Bio Fuel Pvt Ltd - Ethanol Division"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]

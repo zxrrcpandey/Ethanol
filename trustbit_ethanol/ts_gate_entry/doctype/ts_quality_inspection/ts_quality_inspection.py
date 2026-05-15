@@ -8,7 +8,7 @@ form (per-role doctype boundary, Lesson 205). DS auto-creates from Suggestion
 on Suggestion submit.
 
 Submittable DocType (docstatus 0/1/2). Fields:
-  - quality_report_no: auto-generated BBPL-QR-YY-##### (race-safe via make_autoname)
+  - quality_report_no: auto-generated Trustbit-QR-YY-##### (race-safe via make_autoname)
   - lab_register_no: optional manual reference
   - qc_template: drives parameters child table population
   - bag_type / bag_count / bag_weight_kg: bagging info
@@ -272,8 +272,8 @@ class TSQualityInspection(Document):
 					self.party_name = supplier_name
 
 	def _generate_quality_report_no(self):
-		"""Race-safe Quality Report No: BBPL-QR-YY-##### using Frappe's make_autoname."""
-		return make_autoname("BBPL-QR-.YY.-.#####")
+		"""Race-safe Quality Report No: Trustbit-QR-YY-##### using Frappe's make_autoname."""
+		return make_autoname("Trustbit-QR-.YY.-.#####")
 
 	def _calculate_variances(self):
 		"""Legacy coal variance calc (kept for backward compat with dashboards)."""

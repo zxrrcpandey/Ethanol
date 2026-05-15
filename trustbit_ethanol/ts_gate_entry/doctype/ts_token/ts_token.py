@@ -122,9 +122,9 @@ class TSToken(Document):
 				)
 
 	def generate_token_number(self):
-		# Format: BBPL-TKN-YYYY-NNNNN (sequential per year)
+		# Format: Trustbit-TKN-YYYY-NNNNN (sequential per year)
 		year = getdate(self.entry_date).strftime("%Y") if self.entry_date else getdate().strftime("%Y")
-		prefix = f"BBPL-TKN-{year}-"
+		prefix = f"Trustbit-TKN-{year}-"
 
 		# Get next sequential number
 		last = frappe.db.sql(

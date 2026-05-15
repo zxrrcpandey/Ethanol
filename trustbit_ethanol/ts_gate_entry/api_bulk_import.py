@@ -16,19 +16,19 @@ def download_template():
 
 	example_rows = [
 		[
-			"Broken Rice Grade A", "Betul Biofuel Pvt. Ltd.", "Raw Material", "Kg", "100630",
+			"Broken Rice Grade A", "Trustbit Biofuel Pvt. Ltd.", "Raw Material", "Kg", "100630",
 			"No", "", "",
 			"100", "50", "", "",
 			"", "", "", "Yes"
 		],
 		[
-			"Rice Bran Oil", "Betul Biofuel Pvt. Ltd.", "Raw Material", "Kg", "151590",
+			"Rice Bran Oil", "Trustbit Biofuel Pvt. Ltd.", "Raw Material", "Kg", "151590",
 			"Yes", "Custom Variant", "BRK,GRA",
-			"80", "120", "100", "Stores - BBPL",
+			"80", "120", "100", "Stores - Trustbit",
 			"2026-04-01", "", "Multi-variant oil product", "Yes"
 		],
 		[
-			"Maize Grain", "Betul Biofuel Pvt. Ltd.", "Raw Material", "Kg", "100590",
+			"Maize Grain", "Trustbit Biofuel Pvt. Ltd.", "Raw Material", "Kg", "100590",
 			"No", "", "",
 			"", "", "", "",
 			"", "", "", "Yes"

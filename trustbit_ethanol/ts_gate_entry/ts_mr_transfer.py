@@ -618,7 +618,7 @@ def _notify_stores_managers(mr_name):
 	doc = frappe.get_doc("Material Request", mr_name)
 	site = frappe.utils.get_url()
 	link = f"{site}/app/material-request/{mr_name}"
-	subject = _("[BBPL] Material Transfer pending your approval — {0}").format(mr_name)
+	subject = _("[Trustbit] Material Transfer pending your approval — {0}").format(mr_name)
 	body = _build_submit_email_html(doc, link)
 
 	try:
@@ -651,15 +651,15 @@ def _notify_creator(mr_name, action, stock_entry=None, reason=None):
 	link = f"{site}/app/material-request/{mr_name}"
 
 	if action == "approved":
-		subject = _("[BBPL] Your Material Transfer {0} approved").format(mr_name)
+		subject = _("[Trustbit] Your Material Transfer {0} approved").format(mr_name)
 		if stock_entry:
 			se_link = f"{site}/app/stock-entry/{stock_entry}"
-			subject = _("[BBPL] Your Material Transfer {0} approved — Stock Entry {1} created").format(
+			subject = _("[Trustbit] Your Material Transfer {0} approved — Stock Entry {1} created").format(
 				mr_name, stock_entry
 			)
 		body = _build_approve_email_html(doc, link, stock_entry, site)
 	elif action == "rejected":
-		subject = _("[BBPL] Your Material Transfer {0} rejected").format(mr_name)
+		subject = _("[Trustbit] Your Material Transfer {0} rejected").format(mr_name)
 		body = _build_reject_email_html(doc, link, reason)
 	else:
 		return
@@ -702,7 +702,7 @@ def _build_submit_email_html(doc, link):
 		<p style="margin-top:16px;">
 			<a href="{esc(link)}" style="background:#2563eb;color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">Open Material Request</a>
 		</p>
-		<p style="color:#666;font-size:12px;">Trustbit Technologies — BBPL ERP</p>
+		<p style="color:#666;font-size:12px;">Trustbit Technologies — Trustbit Ethanol</p>
 	</div>
 	"""
 
@@ -724,7 +724,7 @@ def _build_approve_email_html(doc, link, stock_entry, site):
 		<p style="margin-top:16px;">
 			<a href="{esc(link)}" style="background:#2563eb;color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">Open Material Request</a>
 		</p>
-		<p style="color:#666;font-size:12px;">Trustbit Technologies — BBPL ERP</p>
+		<p style="color:#666;font-size:12px;">Trustbit Technologies — Trustbit Ethanol</p>
 	</div>
 	"""
 
@@ -743,7 +743,7 @@ def _build_reject_email_html(doc, link, reason):
 		<p style="margin-top:16px;">
 			<a href="{esc(link)}" style="background:#2563eb;color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">Open Material Request</a>
 		</p>
-		<p style="color:#666;font-size:12px;">Trustbit Technologies — BBPL ERP</p>
+		<p style="color:#666;font-size:12px;">Trustbit Technologies — Trustbit Ethanol</p>
 	</div>
 	"""
 

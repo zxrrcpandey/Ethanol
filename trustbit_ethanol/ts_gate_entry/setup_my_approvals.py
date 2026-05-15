@@ -9,7 +9,7 @@ across MR/PO/Post-Dated/Budget Proposal.
 
 1. `ts_my_approvals_enabled` (Check) on TS Settings — default 1,
    permlevel=1 (IT Head / SM editable only). Kill switch.
-2. Workspace "MR & PO Dashboard" nested under "BBPL Ethanol" parent.
+2. Workspace "MR & PO Dashboard" nested under "Trustbit Ethanol" parent.
    Contains HTML block that renders 4 live tiles via
    get_my_pending_counts API.
 
@@ -274,7 +274,7 @@ frappe.call({
 
 
 def _seed_dashboard_workspace():
-	"""Create 'MR & PO Dashboard' workspace nested under 'BBPL Ethanol'.
+	"""Create 'MR & PO Dashboard' workspace nested under 'Trustbit Ethanol'.
 
 	Native Frappe pattern — matches Management Dashboard / G1 / Weighbridge:
 	header + 4 number_cards + spacer + header + shortcuts. Uses child
@@ -282,7 +282,7 @@ def _seed_dashboard_workspace():
 	"""
 	ws_name = "MR & PO Dashboard"
 
-	if not frappe.db.exists("Workspace", "BBPL Ethanol"):
+	if not frappe.db.exists("Workspace", "Trustbit Ethanol"):
 		return
 
 	# Build child-table rows (4 number_cards + 4 shortcuts)
@@ -304,7 +304,7 @@ def _seed_dashboard_workspace():
 		try:
 			doc = frappe.get_doc("Workspace", ws_name)
 			doc.title = ws_name
-			doc.parent_page = "BBPL Ethanol"
+			doc.parent_page = "Trustbit Ethanol"
 			doc.public = 1
 			doc.is_hidden = 0
 			doc.module = "TS Gate Entry"
@@ -325,7 +325,7 @@ def _seed_dashboard_workspace():
 				"name": ws_name,
 				"title": ws_name,
 				"label": ws_name,
-				"parent_page": "BBPL Ethanol",
+				"parent_page": "Trustbit Ethanol",
 				"public": 1,
 				"is_hidden": 0,
 				"module": "TS Gate Entry",

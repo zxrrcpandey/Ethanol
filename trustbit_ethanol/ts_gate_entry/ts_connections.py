@@ -206,8 +206,8 @@ def _qis_from_prs(pr_iterable):
 	Purchase Receipts. v2.9.11.1 — replaces the broken
 	`WHERE TS QI.purchase_receipt = %s` pattern (QI has no such column).
 
-	Three resolution paths (BBPL flow uses A + B; C is rarely populated):
-	  A. PR.ts_token → QI.token_number   (BBPL grain GRN flow)
+	Three resolution paths (Trustbit flow uses A + B; C is rarely populated):
+	  A. PR.ts_token → QI.token_number   (Trustbit grain GRN flow)
 	  B. DS.grn_reference = PR → DS.quality_inspection   (deduction flow)
 	  C. PR Item.quality_inspection   (standard ERPNext field)
 	"""
@@ -237,7 +237,7 @@ def _qis_from_prs(pr_iterable):
 		out.update(r[0] for r in rows)
 	except Exception:
 		pass
-	# Path C — standard PR Item field (defensive; usually empty on BBPL)
+	# Path C — standard PR Item field (defensive; usually empty on Trustbit)
 	try:
 		rows = frappe.db.sql("""
 			SELECT DISTINCT quality_inspection FROM `tabPurchase Receipt Item`

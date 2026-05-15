@@ -66,7 +66,7 @@ def export_stock_ledger_pdf(filters=None):
 	html = frappe.render_template(template, context)
 	pdf_bytes = get_pdf(html, options={"orientation": "Landscape", "page-size": "A4"})
 
-	abbr = (filters.get("company") or "BBPL").replace(" ", "_")[:12]
+	abbr = (filters.get("company") or "Trustbit").replace(" ", "_")[:12]
 	fname = f"TS_Stock_Ledger_FIFO_{abbr}_{filters.get('from_date')}_to_{filters.get('to_date')}.pdf"
 	frappe.local.response.filename = fname
 	frappe.local.response.filecontent = pdf_bytes

@@ -6,7 +6,7 @@ on:
 
 # Disabled auto-run on push/PR because:
 # 1. App depends on ERPNext + India Compliance (not installed in CI)
-# 2. Testing is done manually on demo server (betulbiofuel.mkasystem.com)
+# 2. Testing is done manually on demo server (trustbitbiofuel.mkasystem.com)
 # 3. 10-agent test suite runs 5000+ scenarios on demo before deploy
 #
 # To run manually: Actions → CI → Run workflow

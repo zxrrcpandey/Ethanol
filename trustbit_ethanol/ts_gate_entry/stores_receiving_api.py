@@ -64,8 +64,8 @@ def _copy_po_header_fields(pr, po, token=None):
 		# make_purchase_receipt mapper, these fields stay None → validator
 		# falls back to company_gstin for source state → intra-state
 		# classification → "Cannot charge IGST" error on inter-state
-		# suppliers (supplier state ≠ company state). Fixes BBPL-TKN-00375
-		# and BBPL-TKN-00400 (Adson GJ → BBPL MP, IGST 18%).
+		# suppliers (supplier state ≠ company state). Fixes Trustbit-TKN-00375
+		# and Trustbit-TKN-00400 (Adson GJ → Trustbit MP, IGST 18%).
 		"billing_address",
 		"place_of_supply",
 		"gst_category",

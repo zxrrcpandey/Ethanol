@@ -1,7 +1,7 @@
 """
 v2.8.0 patch — hard-delete TS Unloading Entry DocType.
 
-Safe to run on production: zero rows ever existed on erpbbpl.com (verified 17 Apr 2026).
+Safe to run on production: zero rows ever existed on erptrustbit.com (verified 17 Apr 2026).
 Idempotent: re-runs harmlessly once the DocType + table are gone.
 
 Removes:

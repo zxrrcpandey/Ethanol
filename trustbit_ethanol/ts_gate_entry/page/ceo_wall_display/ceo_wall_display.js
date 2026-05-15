@@ -187,7 +187,7 @@ function _cwd_render(data, page) {
 	if (budget.cc_data && budget.cc_data.length) {
 		budget.cc_data.slice(0, 8).forEach((cc) => {
 			const color = cc.pct > 80 ? "#ef4444" : cc.pct > 60 ? "#f59e0b" : "#22c55e";
-			const cc_short = (cc.cost_center || "").replace(/ - (BBF|BBPL)$/, "");
+			const cc_short = (cc.cost_center || "").replace(/ - (BBF|Trustbit)$/, "");
 			html += '<div class="cwd-budget-row">';
 			html += `<div class="cwd-budget-label"><span style="color:#cbd5e1;">${esc(cc_short)}</span><span style="color:${color};font-weight:700;">${cc.pct}%</span></div>`;
 			html += `<div class="cwd-budget-bar"><div class="cwd-budget-fill" style="width:${Math.min(cc.pct, 100)}%;background:${color};"></div></div>`;

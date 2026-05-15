@@ -887,7 +887,7 @@ class TSItemCreator {
 		if (this._prompt_open) return;
 		this._prompt_open = true;
 		const is_num = fieldname.includes("num");
-		const label = is_num ? "Numerical Code (e.g. 01)" : "Character Code (e.g. BBPL)";
+		const label = is_num ? "Numerical Code (e.g. 01)" : "Character Code (e.g. TBT)";
 		const me = this;
 		const esc = frappe.utils.escape_html;
 		const d = new frappe.ui.Dialog({
@@ -905,7 +905,7 @@ class TSItemCreator {
 					fieldtype: "Data",
 					label: label,
 					reqd: 1,
-					description: is_num ? "1-5 digits (e.g. 01)" : "1-5 alphanumeric (e.g. BBPL, RM)",
+					description: is_num ? "1-5 digits (e.g. 01)" : "1-5 alphanumeric (e.g. TBT, RM)",
 				},
 			],
 			primary_action_label: "Save Code",

@@ -223,7 +223,7 @@ def _send_revision_notification(mr, requested_by, requested_by_name, requested_b
 				has not been modified. Any Purchase Orders previously linked to it would have been blocked.</i>
 			</p>
 			<p style="color: #64748b; font-size: 11px; margin-top: 12px;">
-				TS Gate Entry System — Betul Bio Fuel Pvt. Ltd.
+				TS Gate Entry System — Trustbit Bio Fuel Pvt. Ltd.
 			</p>
 		</div>
 	"""

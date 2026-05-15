@@ -383,7 +383,7 @@ function _cd_budget_bars(budget) {
 	budget.cc_data.forEach((cc) => {
 		const color = cc.pct > 80 ? "#ef4444" : cc.pct > 60 ? "#f59e0b" : "#10b981";
 		const bar_pct = Math.min(cc.pct, 100);
-		const cc_short = (cc.cost_center || "").replace(/ - (BBF|BBPL)$/, "");
+		const cc_short = (cc.cost_center || "").replace(/ - (BBF|Trustbit)$/, "");
 		html += '<div style="padding:6px 8px;background:#f8fafc;border-radius:6px;">';
 		html += `<div style="display:flex;justify-content:space-between;margin-bottom:3px;">`;
 		html += `<span style="font-size:11px;font-weight:500;color:#374151;">${_cd_esc(cc_short)}</span>`;

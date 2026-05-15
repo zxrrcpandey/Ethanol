@@ -1,7 +1,7 @@
 app_name = "trustbit_ethanol"
 app_title = "Trustbit Ethanol Custom App"
 app_publisher = "Trustbit Software"
-app_description = "Custom ERPNext app for Betul Bio Fuel Pvt Ltd - Ethanol Division"
+app_description = "Custom ERPNext app for Trustbit Bio Fuel Pvt Ltd - Ethanol Division"
 app_email = "info@trustbit.com"
 app_license = "mit"
 
@@ -253,7 +253,7 @@ after_migrate = [
 	"trustbit_ethanol.ts_gate_entry.setup_qc_dashboard.reload_quality_lab_workspace",
 	# v2.9.11 — shared Connections panel Custom Fields (PO/MR/PR/PI)
 	"trustbit_ethanol.ts_gate_entry.setup_connections_panel.seed_connections_panel",
-	# v2.9.11.2 — BBPL Letter Head default (creates on demo, no-op on prod)
+	# v2.9.11.2 — Trustbit Letter Head default (creates on demo, no-op on prod)
 	"trustbit_ethanol.ts_gate_entry.setup_default_letter_head.seed_default_letter_head",
 	# v2.9.12 Sprint 2 — Health Check kill-switch field on TS Settings
 	"trustbit_ethanol.ts_gate_entry.setup_health_check.seed_health_check",

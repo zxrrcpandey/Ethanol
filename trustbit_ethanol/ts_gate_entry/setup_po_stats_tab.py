@@ -1,6 +1,6 @@
 """Purchase Order Stats tab + configurable threshold — v2.8.7.
 
-Business need (CTO Rahul, 21 Apr 2026): bulk-RM POs (e.g. BBPL-PO-OT-2026-00013
+Business need (CTO Rahul, 21 Apr 2026): bulk-RM POs (e.g. Trustbit-PO-OT-2026-00013
 with 78 deliveries) make the PO Lifecycle Tracker dominate the form. Move
 the tracker into a dedicated "Stats" tab when the delivery count exceeds a
 configurable threshold. Small POs (≤ threshold) keep the current inline view.

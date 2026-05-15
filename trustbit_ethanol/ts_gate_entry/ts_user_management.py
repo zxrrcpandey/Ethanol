@@ -60,8 +60,8 @@ PROTECTED_USERS = [
     "admin@gmail.com",
     "admin2@gmail.com",
     "ra.pandey008@gmail.com",
-    "pradeep.modi@betulbiofuel.com",
-    "managingdirector@betulbiofuel.com",
+    "pradeep.modi@trustbit.com",
+    "managingdirector@trustbit.com",
     "md@gmail.com",
 ]
 
@@ -523,7 +523,7 @@ def reset_password(email):
     from frappe.utils import get_url
     frappe.sendmail(
         recipients=[email],
-        subject=_("Password Reset — Betul Biofuel ERP"),
+        subject=_("Password Reset — Trustbit Biofuel ERP"),
         message=_(
             "Your password has been reset by IT Admin. "
             "Please click the link below to set a new password:<br><br>"

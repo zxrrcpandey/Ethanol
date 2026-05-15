@@ -73,8 +73,8 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Naming Series",
-   "options": "BBPL-AT-.YYYY.-.#####",
-   "default": "BBPL-AT-.YYYY.-.#####",
+   "options": "Trustbit-AT-.YYYY.-.#####",
+   "default": "Trustbit-AT-.YYYY.-.#####",
    "reqd": 1,
    "set_only_once": 1
   },

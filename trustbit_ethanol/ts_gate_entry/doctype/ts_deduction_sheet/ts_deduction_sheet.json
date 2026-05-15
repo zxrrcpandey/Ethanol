@@ -42,8 +42,8 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "BBPL-DS-.YY.-.#####",
-   "default": "BBPL-DS-.YY.-.#####",
+   "options": "Trustbit-DS-.YY.-.#####",
+   "default": "Trustbit-DS-.YY.-.#####",
    "hidden": 1
   },
   {
@@ -55,7 +55,7 @@
    "in_standard_filter": 1,
    "bold": 1,
    "no_copy": 1,
-   "description": "Auto = name (BBPL-DS-YY-#####). Mirrored for list view convenience.",
+   "description": "Auto = name (Trustbit-DS-YY-#####). Mirrored for list view convenience.",
    "hidden": 1
   },
   {

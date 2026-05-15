@@ -2,20 +2,20 @@
 
 **Version:** 2.9.17.8 | **ERPNext:** V15 | **Module:** TS Gate Entry
 
-Custom ERPNext v15 app for **Betul Bio Fuel Pvt. Ltd.** — an ethanol manufacturing plant. Handles the complete vehicle gate-to-exit lifecycle, multi-level PO/MR approval with CC-based routing, budget management, item creation, quality inspection, and interactive dashboards with a **blind token-based system** designed to prevent manipulation.
+Custom ERPNext v15 app for **Trustbit Bio Fuel Pvt. Ltd.** — an ethanol manufacturing plant. Handles the complete vehicle gate-to-exit lifecycle, multi-level PO/MR approval with CC-based routing, budget management, item creation, quality inspection, and interactive dashboards with a **blind token-based system** designed to prevent manipulation.
 
 ## Recent ships (May 2026)
 
 | Version | Date | Change |
 |---|---|---|
-| **2.9.17.4** | 14 May | **BBPL Purchase Receipt print format + Print PDF button** — new branded PDF print format mirroring locked PO/MR pattern (table-based layout per Lesson 232, Jinja namespace-correct loop scope, letterhead-overlay fix). Toolbar "🖨 Print PDF" button on submitted PRs (`pr_pi_columns.js` adds `_add_bbpl_print_button` calling `frappe.utils.print_format.download_pdf`). Supplier Address resolved via Address doctype lookup; "Location From PO" sourced from `ts_delivery_location`; per-item GST cell uses Item Tax Template name parsing with `doc.taxes[0].rate` fallback. Includes parse_json bug-fix from review iteration. |
+| **2.9.17.4** | 14 May | **Trustbit Purchase Receipt print format + Print PDF button** — new branded PDF print format mirroring locked PO/MR pattern (table-based layout per Lesson 232, Jinja namespace-correct loop scope, letterhead-overlay fix). Toolbar "🖨 Print PDF" button on submitted PRs (`pr_pi_columns.js` adds `_add_trustbit_print_button` calling `frappe.utils.print_format.download_pdf`). Supplier Address resolved via Address doctype lookup; "Location From PO" sourced from `ts_delivery_location`; per-item GST cell uses Item Tax Template name parsing with `doc.taxes[0].rate` fallback. Includes parse_json bug-fix from review iteration. |
 | **2.9.16.7** | 13 May | TS Gate Entry DocPerm seeder for demo/prod parity — idempotent `_seed_gate_entry_docperm()` mirrors v2.9.15.2 Cost Center pattern, re-asserts 10-role DocPerm set on every migrate (Accounts Manager, CEO, G1 Security, G2 Gate Operator, IT Head, MD, Quality Inspector, Stores User, System Manager, Weighbridge Operator). Forward-safe against Lesson 169 master-data drift between environments. |
 | **2.9.16.6** | 13 May | **HOTFIX** — Weighbridge "No permission for TS Settings" popup eliminated. `ts_weighbridge_log.js:45` was calling `get_single_value("TS Settings", "ts_flow_v28_enabled")` directly; Weighbridge Operator role lacks TS Settings read perm → modal on every new entry. Fix: new role-scoped `get_flow_v28_flag()` whitelist helper (Lesson 168 pattern, same as `get_g2_print_mode` / `get_two_pass_flag`). |
 | **2.9.16.5** | 13 May | **P0 HOTFIX** — `ts_gate_entry/api/` package introduced in v2.9.16 silently shadowed pre-existing `ts_gate_entry/api.py` (Python: package wins over module of same name). 7 whitelisted endpoints unreachable for ~3 hours (Weighbridge token search, Weighbridge weight fetch, G2 print mode, two-pass flag, PO autocomplete, PO lifecycle, SLA scheduler). Fix: move all `api.py` content into `api/__init__.py`, delete `api.py`. New Lesson 264 captured. |
 | **2.9.16.4** | 13 May | Purchase Invoice "Token / Receipt Context" section — 5 read-only fields (Token Number/Gate Pass, RST Number, Quality Inspection, Deduction Sheet, Purchase Receipt) snapshotted at insert from first linked PR via items[].purchase_receipt. DS link chain: PR.ts_token → QI (by token_number) → DS (by quality_inspection). One-time backfill on deploy populated 327 existing prod PIs. |
 | **2.9.16.3** | 13 May | TS Deduction Suggestion: `purchase_order` Link Custom Field added to Receipt Context section, snapshotted at insert from source QI. Seeder also auto-bumps DocType.modified to invalidate browser form-meta cache (Lesson 263 — caught live; without the bump, newly-added Custom Fields stay invisible until users run `localStorage.clear()`) |
 | **2.9.16.2** | 12 May | TS Stock Balance Computed audit-grade Script Report — wraps native, replaces stored val_rate with bal_val/bal_qty live, adds Drift % audit signal column. Stock User excluded (audit-grade). |
-| **2.9.16.1** | 12 May | Stock Reports sub-workspace under BBPL Ethanol (seq=10) with 4 shortcuts: TS Stock Ledger FIFO, Stock Ledger (native), Stock Balance → TS Stock Balance Computed, Stock Entry. |
+| **2.9.16.1** | 12 May | Stock Reports sub-workspace under Trustbit Ethanol (seq=10) with 4 shortcuts: TS Stock Ledger FIFO, Stock Ledger (native), Stock Balance → TS Stock Balance Computed, Stock Entry. |
 | **2.9.16** | 11 May | TS Stock Ledger FIFO custom Script Report (Cost Center via LEFT JOIN tabGL Entry + COALESCE expense-account preference per Lesson 257, Total Amount = abs(qty)×rate, branded A4-landscape PDF export with BBF logo, 5000-row hard cap). |
 | **2.9.15.2** | 12 May | Cost Center read perm seeder for 7 BBF approval roles (Grain Purchase Manager, Department Head, General Manager, AVP, Grain Manager, Quality Manager, Admin Reception) — fixes "No permission for Cost Center" popup blocking PO/MR list views (standard-filter Link autocomplete required CC read) |
 | **2.9.15.1** | 12 May | TS Deduction Suggestion "Receipt Context" — 5 read-only fields (Vehicle Number, RST Number, Total Net Weight kg, Supplier Code, Supplier Name) surfaced above QI section; 4 snapshot at insert from QI+PO, net_weight live-fetches from matching Weighbridge Log |
@@ -102,7 +102,7 @@ G1 Security, G2 Gate Operator, Weighbridge Operator, Stores User, Quality Inspec
 ## Installation
 
 ```bash
-bench get-app https://github.com/zxrrcpandey/betul_biofuel.git --branch develop
+bench get-app https://github.com/zxrrcpandey/Ethanol.git --branch develop
 bench --site your-site install-app trustbit_ethanol
 bench --site your-site migrate
 ```
@@ -128,7 +128,7 @@ supervisorctl restart all
 | **2.9.17.7** | 2026-05-14 | **Material Type dropdown** Custom Field added to TS Gate Entry form. New Select field `ts_material_type` with 15 options (Store Material / Scrap / Bardana / Fly Ash / DWGS / Maize / Rice / Coal / DDGS / Ethanol / Liquid Co2 / Iron / DORB / Fusel oil / Dry Ice). Inserted after `material_flow` in flow_section tab. Installs via `create_custom_fields()` on `after_migrate` hook. No JS / no Python logic / no permission change. |
 | **2.9.17.6** | 2026-05-14 | Item Creator default Stock UOM flipped `Kg → Nos`. Value-only change (5 occurrences in `item_creator.js`). Validated against prod data: 3010 items use Nos vs 248 use Kg (92% Nos). Operators no longer need to re-select Nos on every new item. Kg remains selectable. |
 | **2.9.17.5** | 2026-05-14 | Item Creator (`/app/item-creator`) flat-form rewrite — 5-step wizard collapsed into single scrolling page with 5 collapsible `<details>` accordion sections + sticky live-code preview bar. Bundled audit fixes: Lesson 168 whitelisted `get_variant_code()` helper (fail-closed), Lesson 163 rogue `__init__.py` removal, Lesson 174 version badge `v2.9.17.5`, dark-mode contract (17 `[data-theme="dark"]` overrides), mobile breakpoints (768px + 480px), accessibility (native `<details>` keyboard nav, `aria-live` on sticky code, `role=radio/tab`, `:focus-visible`). Net −285 LOC. 6 files. |
-| **2.9.17.4** | 2026-05-14 | BBPL Purchase Receipt branded Print Format + 🖨 Print PDF button on PR form toolbar. Print format mirrors BBPL PO/MR layout with Supplier Invoice No/Date, Vehicle, Warehouse, Cost Center, Project, optional Supplier Address (multi-line via `frappe.get_doc('Address', ...)`), Location (from items[0].ts_delivery_location), conditional Receipt Context (Token/GE/RST/WB Net/QI/DS/Source PO/QC Status), items table with per-item GST cell (amount bold + rate label), totals + Amount in Words + Terms + Received/Verified signatures + BBPL footer. |
+| **2.9.17.4** | 2026-05-14 | Trustbit Purchase Receipt branded Print Format + 🖨 Print PDF button on PR form toolbar. Print format mirrors Trustbit PO/MR layout with Supplier Invoice No/Date, Vehicle, Warehouse, Cost Center, Project, optional Supplier Address (multi-line via `frappe.get_doc('Address', ...)`), Location (from items[0].ts_delivery_location), conditional Receipt Context (Token/GE/RST/WB Net/QI/DS/Source PO/QC Status), items table with per-item GST cell (amount bold + rate label), totals + Amount in Words + Terms + Received/Verified signatures + Trustbit footer. |
 | **2.9.16.7** | 2026-05-13 | TS Gate Entry DocPerm seeder for demo/prod parity — fixed silent permission gap when Custom DocPerm overrides Standard DocPerm; added `_seed_gate_entry_docperm()` idempotent seeder (10 roles incl. Weighbridge Operator). Lesson 169 pattern. |
 | **2.9.16** | 2026-05-13 | Stock Reports module (TS Stock Ledger FIFO + TS Stock Balance Computed), DSG PO link, Quality Lab dashboard, PI Receipt Context (5 fields with backfill on 327 PIs). |
 | **2.9.15.1** | 2026-05-12 | TS Deduction Suggestion Receipt Context — 5 fields above QI section (vehicle, RST, supplier code/name snapshots + live Net Weight via whitelisted `get_live_net_weight`). |
@@ -152,4 +152,4 @@ MIT
 
 ---
 
-*Developed by [Trustbit Technologies Pvt. Ltd.](https://trustbit.com) for Betul Bio Fuel Pvt. Ltd.*
+*Developed by [Trustbit Technologies Pvt. Ltd.](https://trustbit.com) for Trustbit Bio Fuel Pvt. Ltd.*

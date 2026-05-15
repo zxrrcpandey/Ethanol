@@ -984,7 +984,7 @@ def _hide_native_project_on_po():
 	"""v2.9.8.37 — REVERSAL of v2.9.8.36. Hide NATIVE Frappe `project` field
 	on Purchase Order (not our `ts_project`).
 
-	Reason: BBPL's downstream code (reports, automation, deduction-sheet
+	Reason: Trustbit's downstream code (reports, automation, deduction-sheet
 	calculations) reads `ts_project`, not the native ERPNext `project` field.
 	If users edit the native field, ts_project stays empty and the downstream
 	stops working. To prevent the duplication confusion AND keep our
@@ -1247,7 +1247,7 @@ def seed_gate_pass_destinations():
 			"destination_name": "TS Plant",
 			"has_g2_checkpoint": 1,
 			"enabled": 1,
-			"description": "Betul Bio Fuel plant area — G2 checkpoint required"
+			"description": "Trustbit Bio Fuel plant area — G2 checkpoint required"
 		},
 	]
 
@@ -1265,7 +1265,7 @@ def seed_visiting_companies():
 		return
 
 	defaults = [
-		{"company_name": "Betul Bio Fuel", "enabled": 1, "description": "Ethanol Division"},
+		{"company_name": "Trustbit Bio Fuel", "enabled": 1, "description": "Ethanol Division"},
 		{"company_name": "Cattle Feed", "enabled": 1, "description": "Cattle Feed Division"},
 		{"company_name": "Frozen Food", "enabled": 1, "description": "Frozen Food Division"},
 	]
@@ -1325,195 +1325,195 @@ def seed_cc_approval_configs():
 	# Based on CCA.xlsx Indent Matrix provided by IT Head
 	configs = [
 		# ── Standard CCs (MR → Approval → PO) ──
-		{"cc": "Civil - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "rupesh.dhote@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "hr.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Civil - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "rupesh.dhote@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "hr.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "No HOD — skips to AVP"},
-		{"cc": "Boiler ( Bed Material, Charcoal & Consumable ) - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "jayesh.bhardwaj@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Boiler ( Bed Material, Charcoal & Consumable ) - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "jayesh.bhardwaj@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "Akash Jain is both Creator and HOD"},
-		{"cc": "HR, safety & and Furniture Material - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "hr.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "hr.navaahar@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "HR, safety & and Furniture Material - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "hr.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "hr.navaahar@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "Ashish Sharma is both Creator and HOD"},
-		{"cc": "IT Hardware + Services - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "it_helpdesk@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "it_helpdesk@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "IT Hardware + Services - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "it_helpdesk@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "it_helpdesk@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "Kr Dhotte IT Head is own HOD"},
-		{"cc": "Mechanical + Services - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "mechanical@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Mechanical + Services - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "mechanical@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "Mechanical Boiler + Services - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "jayesh.bhardwaj@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Mechanical Boiler + Services - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "jayesh.bhardwaj@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "DG Fuel + Electricity bill - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "purchase@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "purchase@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "DG Fuel + Electricity bill - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "purchase@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "purchase@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "Process ( WTP/CPU, BIOLOGICAL) - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Process ( WTP/CPU, BIOLOGICAL) - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "S.N. Shukla is both Creator and HOD"},
-		{"cc": "Electrical+ Services - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "electricalinstrument@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "dilip.arya@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "electricalinstrument@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Electrical+ Services - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "electricalinstrument@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "dilip.arya@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "electricalinstrument@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "CF- Production - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "takshak.sambare@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "production.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "production.navaahar@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "CF- Production - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "takshak.sambare@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "production.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "production.navaahar@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "CBG-Farming - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "hr.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "cbg.agriculture@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "hr.navaahar@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "CBG-Farming - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "hr.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "cbg.agriculture@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "hr.navaahar@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "BOILER THERMAX - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "BOILER THERMAX - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "TRIVENI TURBINE - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "TRIVENI TURBINE - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "LIASING - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "purchasemanager@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "hr.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "purchase@betulbiofuel.com", "role": "department user"},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "LIASING - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "purchasemanager@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "hr.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "purchase@trustbit.com", "role": "department user"},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "No HOD — skips to AVP"},
-		{"cc": "Bhopal Office - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "purchase@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "purchase@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "Bhopal Office - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "purchase@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "purchase@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "MISCELLANEOUS - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "hr.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "hr.navaahar@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "MISCELLANEOUS - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "hr.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "hr.navaahar@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
 		# Process sub-CCs — all HOD = S.N. Shukla
-		{"cc": "PROCESS ISGEK - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS ISGEK - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "PROCESS MILLING - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS MILLING - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "PROCESS STRUCTURE - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS STRUCTURE - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "PROCESS ACC - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS ACC - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "PROCESS WTP/CPU - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS WTP/CPU - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "PROCESS DRYER - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS DRYER - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "PROCESS BOP - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "dgm.operation@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "PROCESS BOP - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "dgm.operation@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
 		# Boiler sub-CCs — all HOD = Akash Jain
-		{"cc": "BOILER THERMEX - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "BOILER THERMEX - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "BOILER ESP - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "BOILER ESP - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "BOILER TRIVENI - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "BOILER TRIVENI - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "BOILER BOP - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "BOILER BOP - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
-		{"cc": "BOILER FUEL/ASH - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "powerhouse@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "powerhouse@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "BOILER FUEL/ASH - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "powerhouse@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "powerhouse@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		]},
 		# CCs that go to CEO (not AVP) — need a CEO route
-		{"cc": "CF- MARKETING - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "sales.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "sales.navaahar@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "CF- MARKETING - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "sales.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "sales.navaahar@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "IT Head to update route to CEO route when created"},
-		{"cc": "CF- Raw Material - BBPL", "route": "AVP MR App", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "takshak.sambare@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "production.navaahar@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "production.navaahar@betulbiofuel.com", "role": "Department Head", "step": 2},
-			{"type": "Final Approver", "user": "generalmanager@betulbiofuel.com", "role": "AVP", "step": 3},
+		{"cc": "CF- Raw Material - Trustbit", "route": "AVP MR App", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "takshak.sambare@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "production.navaahar@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "production.navaahar@trustbit.com", "role": "Department Head", "step": 2},
+			{"type": "Final Approver", "user": "generalmanager@trustbit.com", "role": "AVP", "step": 3},
 		], "notes": "IT Head to update route to CEO route when created"},
 		# ── CAPEX CCs ──
-		{"cc": "Capex - BBPL", "route": "CAPEX", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "purchasemanager@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "sheikh.mubsshir@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "purchase@betulbiofuel.com", "role": "department user"},
-			{"type": "Final Approver", "user": "pradeep.modi@betulbiofuel.com", "role": "CEO", "step": 1},
+		{"cc": "Capex - Trustbit", "route": "CAPEX", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "purchasemanager@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "sheikh.mubsshir@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "purchase@trustbit.com", "role": "department user"},
+			{"type": "Final Approver", "user": "pradeep.modi@trustbit.com", "role": "CEO", "step": 1},
 		], "notes": "CAPEX route — CEO final approve"},
-		{"cc": "CBG CAPEX - BBPL", "route": "CAPEX", "flow": "Standard", "users": [
-			{"type": "Creator", "user": "purchasemanager@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "sheikh.mubsshir@betulbiofuel.com", "role": "department user"},
-			{"type": "Creator", "user": "purchase@betulbiofuel.com", "role": "department user"},
-			{"type": "Reviewer", "user": "dgm.operation@betulbiofuel.com", "role": "Department Head", "step": 1},
-			{"type": "Final Approver", "user": "pradeep.modi@betulbiofuel.com", "role": "CEO", "step": 1},
+		{"cc": "CBG CAPEX - Trustbit", "route": "CAPEX", "flow": "Standard", "users": [
+			{"type": "Creator", "user": "purchasemanager@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "sheikh.mubsshir@trustbit.com", "role": "department user"},
+			{"type": "Creator", "user": "purchase@trustbit.com", "role": "department user"},
+			{"type": "Reviewer", "user": "dgm.operation@trustbit.com", "role": "Department Head", "step": 1},
+			{"type": "Final Approver", "user": "pradeep.modi@trustbit.com", "role": "CEO", "step": 1},
 		], "notes": "CAPEX with DGM as HOD"},
 		# ── Direct PO CCs (no MR needed) ──
-		{"cc": "Coal - BBPL", "route": "", "flow": "Direct PO", "users": [
-			{"type": "Creator", "user": "purchasemanager@betulbiofuel.com", "role": "Purchase Manager"},
+		{"cc": "Coal - Trustbit", "route": "", "flow": "Direct PO", "users": [
+			{"type": "Creator", "user": "purchasemanager@trustbit.com", "role": "Purchase Manager"},
 		], "notes": "Coal direct PO, MD Akram creates"},
-		{"cc": "Machinery - BBPL", "route": "", "flow": "Direct PO", "users": [
-			{"type": "Creator", "user": "purchase@betulbiofuel.com", "role": "Purchase Manager"},
+		{"cc": "Machinery - Trustbit", "route": "", "flow": "Direct PO", "users": [
+			{"type": "Creator", "user": "purchase@trustbit.com", "role": "Purchase Manager"},
 		], "notes": "Direct PO"},
-		{"cc": "DDGS - BBPL", "route": "", "flow": "Direct PO", "users": [
-			{"type": "Creator", "user": "grain.manager@betulbiofuel.com", "role": "Grain Purchase Manager"},
+		{"cc": "DDGS - Trustbit", "route": "", "flow": "Direct PO", "users": [
+			{"type": "Creator", "user": "grain.manager@trustbit.com", "role": "Grain Purchase Manager"},
 		], "notes": "Direct PO, Grain Manager creates"},
-		{"cc": "CIVIL MATERIAL - BBPL", "route": "", "flow": "Direct PO", "users": [
-			{"type": "Creator", "user": "rupesh.dhote@betulbiofuel.com", "role": "department user"},
+		{"cc": "CIVIL MATERIAL - Trustbit", "route": "", "flow": "Direct PO", "users": [
+			{"type": "Creator", "user": "rupesh.dhote@trustbit.com", "role": "department user"},
 		], "notes": "Direct PO"},
-		{"cc": "CIVIL BOP - BBPL", "route": "", "flow": "Direct PO", "users": [
-			{"type": "Creator", "user": "rupesh.dhote@betulbiofuel.com", "role": "department user"},
+		{"cc": "CIVIL BOP - Trustbit", "route": "", "flow": "Direct PO", "users": [
+			{"type": "Creator", "user": "rupesh.dhote@trustbit.com", "role": "department user"},
 		], "notes": "Direct PO"},
 	]
 
@@ -1629,7 +1629,7 @@ def seed_number_cards():
 	"""Create Number Cards with colorful backgrounds. Updates background_color on existing cards."""
 	cards = [
 		# Green — completed/positive
-		{"name": "Approved Quality", "label": "Approved Quality", "document_type": "TS Quality Inspection", "filters_json": '[["TS Quality Inspection", "status", "=", "Approved"]]', "color": "#10b981", "bg": "#dcfce7", "module": "TS Gate Entry"},
+		{"name": "Approved Quality", "label": "Approved Quality", "document_type": "TS Quality Inspection", "filters_json": '[["TS Quality Inspection", "decision", "=", "Accept"], ["TS Quality Inspection", "docstatus", "=", 1]]', "color": "#10b981", "bg": "#dcfce7", "module": "TS Gate Entry"},
 		{"name": "Completed Today WB", "label": "Completed Today", "document_type": "TS Weighbridge Log", "filters_json": '[["TS Weighbridge Log", "status", "=", "Completed"], ["TS Weighbridge Log", "creation", "Timespan", "today"]]', "color": "#10b981", "bg": "#dcfce7"},
 		{"name": "Exited Today", "label": "Exited Today", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "=", "Exited"], ["TS Token", "g1_exit_time", "Timespan", "today"]]', "color": "#10b981", "bg": "#dcfce7"},
 		{"name": "Exited Today - Main", "label": "Exited Today", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "=", "Exited"], ["TS Token", "creation", "Timespan", "today"]]', "color": "#10b981", "bg": "#dcfce7"},
@@ -1640,7 +1640,7 @@ def seed_number_cards():
 		{"name": "Vehicles Today", "label": "Vehicles Today", "document_type": "TS Token", "filters_json": '[["TS Token", "creation", "Timespan", "today"]]', "color": "#10b981", "bg": "#d1fae5"},
 		{"name": "Visitors Today", "label": "Visitors Today", "document_type": "TS Token", "filters_json": '[["TS Token", "entry_type", "=", "Gate Pass"], ["TS Token", "creation", "Timespan", "today"]]', "color": "#10b981", "bg": "#dcfce7"},
 		# Red — pending/critical
-		{"name": "Pending Quality-1", "label": "Pending Quality", "document_type": "TS Quality Inspection", "filters_json": '[["TS Quality Inspection", "status", "=", "Pending"]]', "color": "#ef4444", "bg": "#fee2e2", "module": "TS Gate Entry"},
+		{"name": "Pending Quality-1", "label": "Pending Quality", "document_type": "TS Quality Inspection", "filters_json": '[["TS Quality Inspection", "docstatus", "=", 0]]', "color": "#ef4444", "bg": "#fee2e2", "module": "TS Gate Entry"},
 		{"name": "Pending Exit", "label": "Pending Exit", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "in", ["GRN Created", "Tare Weighed"]]]', "color": "#ef4444", "bg": "#fee2e2"},
 		{"name": "Pending GRN", "label": "Pending GRN", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "=", "Tare Weighed"]]', "color": "#ef4444", "bg": "#fee2e2"},
 		{"name": "Stuck Vehicles", "label": "Stuck Vehicles", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "not in", ["Exited", "Token Generated"]]]', "color": "#ef4444", "bg": "#fee2e2"},
@@ -1648,7 +1648,7 @@ def seed_number_cards():
 		{"name": "Awaiting Tare Weight", "label": "Awaiting Tare", "document_type": "TS Weighbridge Log", "filters_json": '[["TS Weighbridge Log", "status", "=", "Awaiting Tare Weight"]]', "color": "#ef4444", "bg": "#fee2e2"},
 		{"name": "Items Without Code", "label": "Items Without Code", "document_type": "Item", "filters_json": '[["Item", "item_code", "is", "not set"]]', "color": "#ef4444", "bg": "#fee2e2"},
 		# Pink
-		{"name": "Pending Material Inspections", "label": "Pending Material Inspections", "document_type": "TS Material Inspection", "filters_json": '[["TS Material Inspection", "status", "=", "Pending"]]', "color": "#ec4899", "bg": "#fce7f3", "module": "TS Gate Entry"},
+		{"name": "Pending Material Inspections", "label": "Pending Material Inspections", "document_type": "TS Material Inspection", "filters_json": '[["TS Material Inspection", "status", "=", "Pending Inspection"]]', "color": "#ec4899", "bg": "#fce7f3", "module": "TS Gate Entry"},
 		# Blue — active/info
 		{"name": "Vehicles Inside Plant", "label": "Vehicles Inside Plant", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "not in", ["Exited", "Token Generated"]]]', "color": "#3b82f6", "bg": "#dbeafe"},
 		{"name": "Vehicles Inside - Main", "label": "Vehicles Inside", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "not in", ["Exited", "Token Generated"]]]', "color": "#3b82f6", "bg": "#dbeafe"},
@@ -1661,7 +1661,7 @@ def seed_number_cards():
 		{"name": "Total Active Items", "label": "Total Active Items", "document_type": "Item", "filters_json": '[]', "color": "#10b981", "bg": "#dcfce7"},
 		{"name": "Total Item Groups", "label": "Total Item Groups", "document_type": "Item Group", "filters_json": '[]', "color": "#3b82f6", "bg": "#dbeafe"},
 		# Amber — waiting
-		{"name": "Pending Deductions", "label": "Pending Deductions", "document_type": "TS Deduction Sheet", "filters_json": '[["TS Deduction Sheet", "status", "=", "Calculated"]]', "color": "#f59e0b", "bg": "#fef3c7", "module": "TS Gate Entry"},
+		{"name": "Pending Deductions", "label": "Pending Deductions", "document_type": "TS Deduction Sheet", "filters_json": '[["TS Deduction Sheet", "docstatus", "=", 0]]', "color": "#f59e0b", "bg": "#fef3c7", "module": "TS Gate Entry"},
 		{"name": "Awaiting PO Link", "label": "Awaiting PO Link", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "=", "Token Generated"]]', "color": "#f59e0b", "bg": "#fef3c7"},
 		{"name": "Awaiting Gross Weight", "label": "Awaiting Gross", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "=", "PO Linked"]]', "color": "#f59e0b", "bg": "#fef3c7"},
 		{"name": "Pending Quality", "label": "Pending Quality", "document_type": "TS Token", "filters_json": '[["TS Token", "status", "=", "Tare Weighed"]]', "color": "#f59e0b", "bg": "#fef3c7"},
@@ -1788,18 +1788,18 @@ def seed_mr_approval_routes():
 				{"step_order": 3, "role": "AVP", "action_type": "Final Approve"},
 			],
 			"cost_centers": [
-				"Boiler (Bed Material) - BBPL", "BOILER BOP - BBPL", "BOILER ESP - BBPL",
-				"BOILER FUEL-ASH - BBPL", "BOILER THERMAX - BBPL", "BOILER TRIVENI - BBPL",
-				"CBG-Farming - BBPL", "CF- MARKETING - BBPL", "CF- Production - BBPL",
-				"CF- Raw Material - BBPL", "Civil - BBPL", "DG Fuel - BBPL",
-				"Electrical+ Services - BBPL", "HR, safety & and Furniture Material - BBPL",
-				"LIASING - BBPL", "Main - BBPL", "Mechanical + Services - BBPL",
-				"Mechanical Boiler - BBPL", "MISCELLANEOUS - BBPL",
-				"Process (WTP/CPU BIOLOGICAL) - BBPL", "PROCESS ACC - BBPL",
-				"PROCESS BOP - BBPL", "PROCESS DRYER - BBPL", "PROCESS ISGEK - BBPL",
-				"PROCESS MILLING - BBPL", "PROCESS STRUCTURE - BBPL",
-				"PROCESS WTP-CPU - BBPL", "TRIVENI TURBINE - BBPL",
-				"Bhopal Office - BBPL", "RTS Betul - BBPL",
+				"Boiler (Bed Material) - Trustbit", "BOILER BOP - Trustbit", "BOILER ESP - Trustbit",
+				"BOILER FUEL-ASH - Trustbit", "BOILER THERMAX - Trustbit", "BOILER TRIVENI - Trustbit",
+				"CBG-Farming - Trustbit", "CF- MARKETING - Trustbit", "CF- Production - Trustbit",
+				"CF- Raw Material - Trustbit", "Civil - Trustbit", "DG Fuel - Trustbit",
+				"Electrical+ Services - Trustbit", "HR, safety & and Furniture Material - Trustbit",
+				"LIASING - Trustbit", "Main - Trustbit", "Mechanical + Services - Trustbit",
+				"Mechanical Boiler - Trustbit", "MISCELLANEOUS - Trustbit",
+				"Process (WTP/CPU BIOLOGICAL) - Trustbit", "PROCESS ACC - Trustbit",
+				"PROCESS BOP - Trustbit", "PROCESS DRYER - Trustbit", "PROCESS ISGEK - Trustbit",
+				"PROCESS MILLING - Trustbit", "PROCESS STRUCTURE - Trustbit",
+				"PROCESS WTP-CPU - Trustbit", "TRIVENI TURBINE - Trustbit",
+				"Bhopal Office - Trustbit", "RTS Trustbit - Trustbit",
 			],
 		},
 		{
@@ -1808,8 +1808,8 @@ def seed_mr_approval_routes():
 				{"step_order": 1, "role": "CEO", "action_type": "Final Approve"},
 			],
 			"cost_centers": [
-				"CF- Capex - BBPL", "CBG CAPEX - BBPL", "NEW VALLEY CAPEX - BBPL",
-				"BAC Capex - BBPL", "Capex - BBPL", "Delhi Office - BBPL",
+				"CF- Capex - Trustbit", "CBG CAPEX - Trustbit", "NEW VALLEY CAPEX - Trustbit",
+				"BAC Capex - Trustbit", "Capex - Trustbit", "Delhi Office - Trustbit",
 			],
 		},
 		{
@@ -1817,7 +1817,7 @@ def seed_mr_approval_routes():
 			"steps": [
 				{"step_order": 1, "role": "AVP", "action_type": "Final Approve"},
 			],
-			"cost_centers": ["IT Hardware + Services - BBPL"],
+			"cost_centers": ["IT Hardware + Services - Trustbit"],
 		},
 		{
 			"name": "Store 1", "route_name": "Store 1", "is_active": 0,
@@ -1856,8 +1856,8 @@ def seed_ts_settings():
 	defaults = {
 		"sla_threshold_minutes": 120,
 		"token_suffix_digits": 5,
-		"default_warehouse": "Stores - BBPL",
-		"default_accepted_warehouse": "Stores - BBPL",
+		"default_warehouse": "Stores - Trustbit",
+		"default_accepted_warehouse": "Stores - Trustbit",
 		"auto_submit_grn": 1,
 		"enable_po_approval": 1,
 		"enable_mr_approval": 1,
@@ -1915,70 +1915,70 @@ def seed_ts_settings():
 def seed_cc_codes():
 	"""Seed cc_code on Cost Centers for MR naming series."""
 	CC_CODES = {
-		"BAC Capex - BBPL": "BAC-CAP",
-		"Betul Biofuel Private Limited- BBPL - BBPL": "BBPL",
-		"Bhopal Office - BBPL": "BHO",
-		"Boiler ( Bed Material, Charcoal & Consumable ) - BBPL": "BLR-CON",
-		"BOILER BOP - BBPL": "BLR-BOP",
-		"BOILER ESP - BBPL": "BLR-ESP",
-		"BOILER FUEL/ASH - BBPL": "BLR-FA",
-		"BOILER THERMEX - BBPL": "BLR-THX",
-		"BOILER TRIVENI - BBPL": "BLR-TRV",
-		"BOLIER THERMAX - BBPL": "BLR-TMX",
-		"Capex - BBPL": "CAPEX",
-		"CBG B.G-Gen - BBPL": "CBG-GEN",
-		"CBG B.G-Upg - BBPL": "CBG-UPG",
-		"CBG CAPEX - BBPL": "CBG-CAP",
-		"CBG CIVIL - BBPL": "CBG-CIV",
-		"CBG E&C - BBPL": "CBG-EC",
-		"CBG Infra - BBPL": "CBG-INF",
-		"CBG-Farming - BBPL": "CBG-FRM",
-		"CF- Capex - BBPL": "CF-CAP",
-		"CF- MARKETING - BBPL": "CF-MKT",
-		"CF- Production - BBPL": "CF-PRD",
-		"CF- Raw Material - BBPL": "CF-RM",
-		"Civil - BBPL": "CIV",
-		"CIVIL BOP - BBPL": "CIV-BOP",
-		"CIVIL MATERIAL - BBPL": "CIV-MAT",
-		"CO2 - BBPL": "CO2",
-		"Coal - BBPL": "COAL",
-		"DDGS - BBPL": "DDGS",
-		"Delhi Office - BBPL": "DEL",
-		"DG Fuel + Electricity bill - BBPL": "DG",
-		"Electrical+ Services - BBPL": "ELC",
-		"Expantion 150KLPD Mechnical - BBPL": "EXP-MEC",
-		"Expantion Civil Work - BBPL": "EXP-CIV",
-		"HR, safety & and Furniture Material - BBPL": "HR",
-		"IT Hardware + Services - BBPL": "IT",
-		"Labour Quarter - BBPL": "LBR",
-		"LIASING - BBPL": "LIA",
-		"Machinery - BBPL": "MACH",
-		"Main - BBPL": "MAIN",
-		"Mechanical + Services - BBPL": "MEC",
-		"Mechanical Boiler + Services - BBPL": "MEC-BLR",
-		"MISCELLANEOUS - BBPL": "MISC",
-		"NEW VALLEY CAPEX - BBPL": "NV-CAP",
-		"Process ( WTP/CPU, BIOLOGICAL) - BBPL": "PRC-BIO",
-		"PROCESS ACC - BBPL": "PRC-ACC",
-		"PROCESS BOP - BBPL": "PRC-BOP",
-		"PROCESS DRYER - BBPL": "PRC-DRY",
-		"PROCESS ISGEK - BBPL": "PRC-ISG",
-		"PROCESS MILLING - BBPL": "PRC-MIL",
-		"PROCESS STRUCTURE - BBPL": "PRC-STR",
-		"PROCESS WTP/CPU - BBPL": "PRC-WTP",
-		"RDPS-VIJAY INTERNATIONAL - BBPL": "RDPS",
-		"RM MAIZE/RICE/DORB - BBPL": "RM",
-		"RTS Betul - BBPL": "RTS",
-		"TRIVENI TURBINE - BBPL": "TRV-TRB",
-		# v2.9.5 — CFBBPL company cost centers (sister concern Cattle Feed BBF Pvt Ltd).
-		# Discovered missing during build phase — added so MR naming on CFBBPL
+		"BAC Capex - Trustbit": "BAC-CAP",
+		"Trustbit Biofuel Private Limited- Trustbit - Trustbit": "Trustbit",
+		"Bhopal Office - Trustbit": "BHO",
+		"Boiler ( Bed Material, Charcoal & Consumable ) - Trustbit": "BLR-CON",
+		"BOILER BOP - Trustbit": "BLR-BOP",
+		"BOILER ESP - Trustbit": "BLR-ESP",
+		"BOILER FUEL/ASH - Trustbit": "BLR-FA",
+		"BOILER THERMEX - Trustbit": "BLR-THX",
+		"BOILER TRIVENI - Trustbit": "BLR-TRV",
+		"BOLIER THERMAX - Trustbit": "BLR-TMX",
+		"Capex - Trustbit": "CAPEX",
+		"CBG B.G-Gen - Trustbit": "CBG-GEN",
+		"CBG B.G-Upg - Trustbit": "CBG-UPG",
+		"CBG CAPEX - Trustbit": "CBG-CAP",
+		"CBG CIVIL - Trustbit": "CBG-CIV",
+		"CBG E&C - Trustbit": "CBG-EC",
+		"CBG Infra - Trustbit": "CBG-INF",
+		"CBG-Farming - Trustbit": "CBG-FRM",
+		"CF- Capex - Trustbit": "CF-CAP",
+		"CF- MARKETING - Trustbit": "CF-MKT",
+		"CF- Production - Trustbit": "CF-PRD",
+		"CF- Raw Material - Trustbit": "CF-RM",
+		"Civil - Trustbit": "CIV",
+		"CIVIL BOP - Trustbit": "CIV-BOP",
+		"CIVIL MATERIAL - Trustbit": "CIV-MAT",
+		"CO2 - Trustbit": "CO2",
+		"Coal - Trustbit": "COAL",
+		"DDGS - Trustbit": "DDGS",
+		"Delhi Office - Trustbit": "DEL",
+		"DG Fuel + Electricity bill - Trustbit": "DG",
+		"Electrical+ Services - Trustbit": "ELC",
+		"Expantion 150KLPD Mechnical - Trustbit": "EXP-MEC",
+		"Expantion Civil Work - Trustbit": "EXP-CIV",
+		"HR, safety & and Furniture Material - Trustbit": "HR",
+		"IT Hardware + Services - Trustbit": "IT",
+		"Labour Quarter - Trustbit": "LBR",
+		"LIASING - Trustbit": "LIA",
+		"Machinery - Trustbit": "MACH",
+		"Main - Trustbit": "MAIN",
+		"Mechanical + Services - Trustbit": "MEC",
+		"Mechanical Boiler + Services - Trustbit": "MEC-BLR",
+		"MISCELLANEOUS - Trustbit": "MISC",
+		"NEW VALLEY CAPEX - Trustbit": "NV-CAP",
+		"Process ( WTP/CPU, BIOLOGICAL) - Trustbit": "PRC-BIO",
+		"PROCESS ACC - Trustbit": "PRC-ACC",
+		"PROCESS BOP - Trustbit": "PRC-BOP",
+		"PROCESS DRYER - Trustbit": "PRC-DRY",
+		"PROCESS ISGEK - Trustbit": "PRC-ISG",
+		"PROCESS MILLING - Trustbit": "PRC-MIL",
+		"PROCESS STRUCTURE - Trustbit": "PRC-STR",
+		"PROCESS WTP/CPU - Trustbit": "PRC-WTP",
+		"RDPS-VIJAY INTERNATIONAL - Trustbit": "RDPS",
+		"RM MAIZE/RICE/DORB - Trustbit": "RM",
+		"RTS Trustbit - Trustbit": "RTS",
+		"TRIVENI TURBINE - Trustbit": "TRV-TRB",
+		# v2.9.5 — CFTrustbit company cost centers (sister concern Cattle Feed BBF Pvt Ltd).
+		# Discovered missing during build phase — added so MR naming on CFTrustbit
 		# doesn't fall through to the "MISC" fallback.
-		"Main - CFBBPL": "CFB-MAIN",
-		"Cattle Feed Betul Biofuel Private Limited - CFBBPL": "CFBBPL",
-		# v2.9.8.17 — CF- Production - CFBBPL was missed in the v2.9.5 batch.
+		"Main - CFTrustbit": "CFB-MAIN",
+		"Cattle Feed Trustbit Biofuel Private Limited - CFTrustbit": "CFTrustbit",
+		# v2.9.8.17 — CF- Production - CFTrustbit was missed in the v2.9.5 batch.
 		# Caught by regression test (MR creation against this CC failed with "no
-		# CC Code" error). Pattern matches BBPL counterpart "CF-PRD" with CFB- prefix.
-		"CF- Production - CFBBPL": "CFB-PRD",
+		# CC Code" error). Pattern matches Trustbit counterpart "CF-PRD" with CFB- prefix.
+		"CF- Production - CFTrustbit": "CFB-PRD",
 	}
 
 	for cc_name, code in CC_CODES.items():
@@ -2174,7 +2174,7 @@ def seed_global_defaults():
 	changed = False
 
 	if not gd.default_company:
-		company = frappe.db.get_value("Company", {"abbr": "BBPL"}, "name")
+		company = frappe.db.get_value("Company", {"abbr": "Trustbit"}, "name")
 		if company:
 			gd.default_company = company
 			changed = True
@@ -2207,7 +2207,7 @@ def seed_navbar_website_settings():
 	ws = frappe.get_doc("Website Settings")
 	changed = False
 	if not ws.app_name:
-		ws.app_name = "Betul Biofuel Pvt. Ltd."
+		ws.app_name = "Trustbit Biofuel Pvt. Ltd."
 		changed = True
 	if not ws.banner_image:
 		ws.banner_image = "/files/client_logo.png"
@@ -2674,7 +2674,7 @@ def _seed_cost_center_approval_perms():
 	that perm, so the user sees a "No permission for Cost Center" popup that
 	blocks the PO/MR list view.
 
-	Reproduced on demo for grain.manager@betulbiofuel.com (roles: Grain
+	Reproduced on demo for grain.manager@trustbit.com (roles: Grain
 	Purchase Manager + Grain Manager + Quality Manager — none had CC read).
 
 	Read-only at permlevel=0; CC scoping for approvals continues via

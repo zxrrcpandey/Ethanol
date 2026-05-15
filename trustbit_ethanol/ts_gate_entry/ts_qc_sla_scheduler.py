@@ -95,12 +95,12 @@ def weekly_qc_email():
 				Action required: Quality Lab should complete inspections to unblock supplier payment.
 				Override available on each PI (CEO / SM / IT Head) with documented reason.
 			</p>
-			<p style="font-size:11px;color:#94a3b8;">— Trustbit Ethanol (BBF) — QC SLA Monitor</p>
+			<p style="font-size:11px;color:#94a3b8;">— Trustbit Ethanol — QC SLA Monitor</p>
 		"""
 
 		frappe.sendmail(
 			recipients=recipients,
-			subject=f"[BBF] Weekly QC Overdue Report — {len(stuck)} stuck PR(s)",
+			subject=f"[Trustbit] Weekly QC Overdue Report — {len(stuck)} stuck PR(s)",
 			message=message,
 			now=False,  # Queue via EmailQueue for audit
 		)

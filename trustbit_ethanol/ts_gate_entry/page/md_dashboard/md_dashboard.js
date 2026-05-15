@@ -108,7 +108,7 @@ function _md_render(data, $c) {
 	// ── Hero Header ──
 	html += `<div class="md-hero md-animate">
 		<div>
-			<div class="md-hero-title">Betul Bio Fuel Pvt Ltd</div>
+			<div class="md-hero-title">Trustbit Bio Fuel Pvt Ltd</div>
 			<div class="md-hero-sub">Managing Director's Executive Dashboard</div>
 		</div>
 		<div class="md-hero-right">

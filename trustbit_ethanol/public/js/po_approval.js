@@ -8,8 +8,8 @@ frappe.ui.form.on("Purchase Order", {
 		// Show fallback banner if backend silently picked default master.
 		_ts_render_deduction_fallback_banner(frm);
 		if (frm.is_new()) return;
-		// v2.9.8.31: default to BBPL Purchase Order (new mockup format).
-		_ts_add_print_button(frm, "BBPL Purchase Order");
+		// v2.9.8.31: default to Trustbit Purchase Order (new mockup format).
+		_ts_add_print_button(frm, "Trustbit Purchase Order");
 		_load_approval_context(frm);
 		_load_budget_indicator(frm);
 		_load_lifecycle_tracker(frm);
@@ -21,7 +21,7 @@ frappe.ui.form.on("Purchase Order", {
 	cost_center(frm) {
 		if (!frm.is_new()) _load_budget_indicator(frm);
 	},
-	// v2.9.8.37 — preserve cost_center when ts_project (BBPL's project field) changes.
+	// v2.9.8.37 — preserve cost_center when ts_project (Trustbit's project field) changes.
 	// Native `project` is hidden on PO in v2.9.8.37; users interact with ts_project.
 	// Same defensive snapshot+restore pattern as MR (frame: ts_project triggers a
 	// Link-query refresh side-effect that can wipe cost_center).
@@ -989,8 +989,8 @@ function _ts_add_print_button(frm, default_format) {
 
 	// Add our custom Print button as standalone (not inside Actions)
 	frm.add_custom_button(__("🖨 Print PDF"), () => {
-		// v2.9.8.31: BBPL Purchase Order added as the new default per-PDF-mockup format.
-		const formats = ["BBPL Purchase Order", "TS Purchase Order", "TS Purchase Order (Clean)"];
+		// v2.9.8.31: Trustbit Purchase Order added as the new default per-PDF-mockup format.
+		const formats = ["Trustbit Purchase Order", "TS Purchase Order", "TS Purchase Order (Clean)"];
 
 		frappe.prompt({
 			fieldtype: "Select",

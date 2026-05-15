@@ -1432,7 +1432,7 @@ def _build_notification_message(doc, action, extra):
 		{reason_html}
 		<p><a href="{doc_url}" style="background: #2490EF; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px;">View {doc_label}</a></p>
 		<hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-		<p style="color: #888; font-size: 12px;">TS Gate Entry System — Betul Bio Fuel Pvt. Ltd.</p>
+		<p style="color: #888; font-size: 12px;">TS Gate Entry System — Trustbit Bio Fuel Pvt. Ltd.</p>
 	</div>
 	"""
 
@@ -2039,7 +2039,7 @@ def po_before_save(doc, method):
 		_copy_project_from_mr(doc)
 
 	# ── v2.9.8.37: Mirror ts_project → native project for ERPNext mapper compat ──
-	# Native project field is hidden in form (v2.9.8.37); BBPL downstream reads
+	# Native project field is hidden in form (v2.9.8.37); Trustbit downstream reads
 	# ts_project, but ERPNext PR/PI mappers + project-based reports still need
 	# the native `project` column populated. Sync silently on every save.
 	if doc.get("ts_project") and doc.project != doc.ts_project:
@@ -2147,7 +2147,7 @@ def mr_before_save(doc, method):
 
 	# ── v2.9.0.6 (Bug 11.F): defensive CC fill ──
 	# Frappe auto-fills item rows' cost_center from Item.default_cost_center
-	# (often "Main - BBPL"), causing User Permission errors for users
+	# (often "Main - Trustbit"), causing User Permission errors for users
 	# restricted to specific CCs. JS handles the proactive fix; this is the
 	# server-side safety net for API-driven creates / imports / programmatic
 	# saves that bypass the JS layer.

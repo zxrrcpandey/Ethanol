@@ -8,7 +8,7 @@ attach a generic LEGACY template so v2.9 calculation paths still work.
 
 Auto-creates the templates (TS QC Template + child TS QC Inspection Row)
 on first run if missing. Sets `quality_report_no` = "LEGACY-QI-{name}" when
-empty so the unique BBPL-QR-YY-##### space is not collided with.
+empty so the unique Trustbit-QR-YY-##### space is not collided with.
 
 Idempotent + safe-rollback:
   Skipped entirely when TS Settings.ts_qc_v29_legacy_converted == 1.

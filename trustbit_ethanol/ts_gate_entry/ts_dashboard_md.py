@@ -174,7 +174,7 @@ def _get_company_overview(today_date, start_date, end_date, fiscal_year, fy_star
 
 		overview.append({
 			"company": company,
-			"short_name": company.replace("Betul Bio Fuel", "TS").replace("Betul Biofuel Private Limited", "BBPL").strip(),
+			"short_name": company.replace("Trustbit Bio Fuel", "TS").replace("Trustbit Biofuel Private Limited", "TS").replace("Trustbit Bio Fuel", "TS").replace("Trustbit Biofuel Private Limited", "TS").strip(),
 			"po_value": flt(po_val),
 			"pi_value": flt(pi_val),
 			"pr_count": pr_count,
@@ -421,7 +421,7 @@ def _get_budget(fiscal_year, fy_start, fy_end):
 		used = flt(committed) + flt(actual)
 		pct = round((used / flt(budget_amt)) * 100, 1) if budget_amt > 0 else 0
 
-		short_name = company.replace("Betul Bio Fuel", "TS").replace("Betul Biofuel Private Limited", "BBPL").strip()
+		short_name = company.replace("Trustbit Bio Fuel", "TS").replace("Trustbit Biofuel Private Limited", "TS").replace("Trustbit Bio Fuel", "TS").replace("Trustbit Biofuel Private Limited", "TS").strip()
 		result.append({
 			"company": company,
 			"short_name": short_name,

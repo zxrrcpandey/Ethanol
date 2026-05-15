@@ -52,7 +52,7 @@
   },
   {
    "bold": 1,
-   "description": "Auto-generated BBPL-QR-YY-##### on first save. Globally unique.",
+   "description": "Auto-generated Trustbit-QR-YY-##### on first save. Globally unique.",
    "fieldname": "quality_report_no",
    "fieldtype": "Data",
    "in_list_view": 1,

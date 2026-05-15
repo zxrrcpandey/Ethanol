@@ -135,7 +135,7 @@
  "name": "Dashboards",
  "number_cards": [],
  "owner": "Administrator",
- "parent_page": "BBPL Ethanol",
+ "parent_page": "Trustbit Ethanol",
  "public": 1,
  "roles": [
   {"role": "System Manager"},

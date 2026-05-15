@@ -1,4 +1,4 @@
-"""Seed data for TS Gate Entry module — exported from demo server (betulbiofuel.mkasystem.com)."""
+"""Seed data for TS Gate Entry module — exported from demo server (trustbitbiofuel.mkasystem.com)."""
 
 CUSTOM_DOCPERM = [
 	{"parent": "Company", "role": "Accounts Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1, "share": 1, "print": 1, "email": 1},
@@ -215,19 +215,19 @@ PROPERTY_SETTERS = [
 	{"doc_type": "Purchase Receipt", "field_name": "in_words", "property": "hidden", "property_type": "Check", "value": "0", "doctype_or_field": "DocField"},
 	{"doc_type": "Purchase Receipt", "field_name": "transporter_name", "property": "fetch_from", "property_type": "Small Text", "value": "transporter.supplier_name", "doctype_or_field": "DocField"},
 	{"doc_type": "Purchase Receipt", "field_name": "transporter_name", "property": "fieldtype", "property_type": "Select", "value": "Small Text", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Deduction Sheet", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "BBPL-DED-.YYYY.-.#####", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Deduction Sheet", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "BBPL-DED-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Deduction Sheet", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "Trustbit-DED-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Deduction Sheet", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "Trustbit-DED-.YYYY.-.#####", "doctype_or_field": "DocField"},
 	{"doc_type": "TS Gate Entry", "field_name": "driver", "property": "hidden", "property_type": "Check", "value": "1", "doctype_or_field": "DocField"},
 	{"doc_type": "TS Gate Entry", "field_name": "driver_mobile", "property": "hidden", "property_type": "Check", "value": "1", "doctype_or_field": "DocField"},
 	{"doc_type": "TS Gate Entry", "field_name": "driver_name", "property": "hidden", "property_type": "Check", "value": "1", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Gate Entry", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "BBPL-GE-.YYYY.-.#####", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Gate Entry", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "BBPL-GE-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Gate Entry", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "Trustbit-GE-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Gate Entry", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "Trustbit-GE-.YYYY.-.#####", "doctype_or_field": "DocField"},
 	{"doc_type": "TS Gate Entry", "field_name": "vehicle_master", "property": "hidden", "property_type": "Check", "value": "1", "doctype_or_field": "DocField"},
 	{"doc_type": "TS Gate Entry", "field_name": "vehicle_type", "property": "hidden", "property_type": "Check", "value": "1", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Quality Inspection", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "BBPL-QI-.YYYY.-.#####", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Quality Inspection", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "BBPL-QI-.YYYY.-.#####", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Weighbridge Log", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "BBPL-WB-.YYYY.-.#####", "doctype_or_field": "DocField"},
-	{"doc_type": "TS Weighbridge Log", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "BBPL-WB-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Quality Inspection", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "Trustbit-QI-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Quality Inspection", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "Trustbit-QI-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Weighbridge Log", "field_name": "naming_series", "property": "default", "property_type": "Text", "value": "Trustbit-WB-.YYYY.-.#####", "doctype_or_field": "DocField"},
+	{"doc_type": "TS Weighbridge Log", "field_name": "naming_series", "property": "options", "property_type": "Text", "value": "Trustbit-WB-.YYYY.-.#####", "doctype_or_field": "DocField"},
 	{"doc_type": "Supplier", "field_name": "supplier_type", "property": "options", "property_type": "Text", "value": "Company\nIndividual\nPartnership\nHUF\nFirm\nPerson\nArtificial & Judicial Person", "doctype_or_field": "DocField"},
 	{"doc_type": "Customer", "field_name": "customer_type", "property": "options", "property_type": "Text", "value": "Company\nIndividual\nPartnership\nHUF\nFirm\nPerson\nArtificial & Judicial Person", "doctype_or_field": "DocField"},
 ]
