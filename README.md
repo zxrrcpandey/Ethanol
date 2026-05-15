@@ -153,4 +153,4 @@ MIT
 
 ---
 
-*Developed by [Trustbit Technologies Pvt. Ltd.](https://trustbit.com) for Trustbit Bio Fuel Pvt. Ltd.*
+*Developed by [Trustbit Technologies Pvt. Ltd.](https://trustbit.com)*
