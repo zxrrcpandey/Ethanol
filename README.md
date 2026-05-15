@@ -1,6 +1,7 @@
-# Trustbit Ethanol — TS Gate Entry System
+# Trustbit Ethanol — End-to-End ERP for Bio-Fuel Manufacturing
 
-**Version:** 2.9.17.8 | **ERPNext:** V15 | **Module:** TS Gate Entry
+**Version:** 2.9.17.8 | **ERPNext:** V15
+**Scope:** Vehicle gate-to-exit · PO/MR approval · Budgets · Item creation · Quality · Stock · Executive dashboards
 
 Custom ERPNext v15 app for **Trustbit Bio Fuel Pvt. Ltd.** — an ethanol manufacturing plant. Handles the complete vehicle gate-to-exit lifecycle, multi-level PO/MR approval with CC-based routing, budget management, item creation, quality inspection, and interactive dashboards with a **blind token-based system** designed to prevent manipulation.
 
