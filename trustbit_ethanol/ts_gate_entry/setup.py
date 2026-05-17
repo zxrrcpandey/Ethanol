@@ -874,6 +874,9 @@ def create_custom_fields():
 	])
 
 	# ── v2.6.1 G1 Driver Details on TS Token (Custom Fields) ──
+	# v2.9.18: hidden=1 — replaced by master-based capture via `driver` Link
+	#          (TS Driver Master) and the new `vehicle_master` Link (TS Vehicle Master).
+	#          Columns kept for legacy reports / print formats; form-hidden only.
 	custom_fields["TS Token"] = [
 		{
 			"fieldname": "ts_driver_name_g1",
@@ -881,6 +884,7 @@ def create_custom_fields():
 			"label": "Driver Name",
 			"insert_after": "vehicle_number",
 			"depends_on": "eval:doc.entry_type=='Material'",
+			"hidden": 1,
 		},
 		{
 			"fieldname": "ts_driver_license_g1",
@@ -888,6 +892,7 @@ def create_custom_fields():
 			"label": "Driver License Number",
 			"insert_after": "ts_driver_name_g1",
 			"depends_on": "eval:doc.entry_type=='Material'",
+			"hidden": 1,
 		},
 		{
 			"fieldname": "ts_driver_mobile_g1",
@@ -895,34 +900,41 @@ def create_custom_fields():
 			"label": "Driver Mobile",
 			"insert_after": "ts_driver_license_g1",
 			"depends_on": "eval:doc.entry_type=='Material'",
+			"hidden": 1,
 		},
 		{
 			"fieldname": "ts_g1_operator_name",
 			"fieldtype": "Data",
 			"label": "G1 Operator Name",
 			"insert_after": "ts_driver_mobile_g1",
+			"hidden": 1,
 		},
 	]
 
 	# ── v2.6.1 G1 Driver Info + G2 Operator on TS Gate Entry (Custom Fields) ──
+	# v2.9.18: G1 driver echo fields hidden — captured via `driver` Link (TS Driver Master)
+	#          with fetch_from already wired. G2 operator stays visible (no Master).
 	custom_fields["TS Gate Entry"] = [
 		{
 			"fieldname": "ts_g1_driver_name",
 			"fieldtype": "Data",
 			"label": "G1 Driver Name",
 			"insert_after": "vehicle_number_display",
+			"hidden": 1,
 		},
 		{
 			"fieldname": "ts_g1_driver_license",
 			"fieldtype": "Data",
 			"label": "G1 Driver License",
 			"insert_after": "ts_g1_driver_name",
+			"hidden": 1,
 		},
 		{
 			"fieldname": "ts_g1_driver_mobile",
 			"fieldtype": "Data",
 			"label": "G1 Driver Mobile",
 			"insert_after": "ts_g1_driver_license",
+			"hidden": 1,
 		},
 		{
 			"fieldname": "ts_g2_operator_name",
@@ -956,6 +968,9 @@ def create_custom_fields():
 
 	_create_custom_fields(custom_fields)
 	_seed_vehicle_origin_fields()
+	_backfill_vehicle_origin_master()
+	_migrate_vehicle_origin_data_to_link()
+	_hide_legacy_g1_custom_fields()
 	_seed_pi_update_stock_return_visibility()
 	_seed_dsg_receipt_context_fields()
 	_seed_quality_lab_dsg_shortcuts()
@@ -2441,6 +2456,123 @@ def _seed_vehicle_origin_fields():
 	for dt, _, _ in rows:
 		frappe.db.updatedb(dt)
 	frappe.db.commit()
+
+
+def _backfill_vehicle_origin_master():
+	"""v2.9.18 — Seed TS Vehicle Origin master from distinct existing free-text values.
+
+	MUST run BEFORE _migrate_vehicle_origin_data_to_link so the Data→Link conversion
+	finds matching Master records and doesn't break legacy data references.
+	"""
+	if not frappe.db.exists("DocType", "TS Vehicle Origin"):
+		return  # fresh install before migrate of the new DocType — skip gracefully
+
+	sources = [
+		("tabTS Token", "vehicle_origin"),
+		("tabTS Gate Entry", "vehicle_origin"),
+		("tabPurchase Receipt", "vehicle_origin"),
+		("tabPurchase Invoice", "vehicle_origin"),
+	]
+	distinct = set()
+	for table, col in sources:
+		dt = table.replace("tab", "", 1)
+		if not frappe.db.has_column(dt, col):
+			continue
+		rows = frappe.db.sql(
+			f"SELECT DISTINCT TRIM(`{col}`) AS v FROM `{table}` "
+			f"WHERE `{col}` IS NOT NULL AND TRIM(`{col}`) != ''",
+			as_dict=True,
+		)
+		for r in rows:
+			if r.v:
+				distinct.add(r.v)
+
+	for origin_name in sorted(distinct):
+		if frappe.db.exists("TS Vehicle Origin", origin_name):
+			continue
+		try:
+			frappe.get_doc({
+				"doctype": "TS Vehicle Origin",
+				"origin_name": origin_name,
+			}).insert(ignore_permissions=True)
+		except Exception:
+			frappe.log_error(
+				f"v2.9.18 Vehicle Origin backfill skipped: {origin_name!r}",
+				"vehicle_origin_backfill",
+			)
+	frappe.db.commit()
+
+
+def _migrate_vehicle_origin_data_to_link():
+	"""v2.9.18 — Flip vehicle_origin Custom Fields from Data → Link (TS Vehicle Origin).
+
+	Idempotent — skips fields already Link. MUST run AFTER _backfill_vehicle_origin_master
+	so existing column values reference real Master records.
+	"""
+	if not frappe.db.exists("DocType", "TS Vehicle Origin"):
+		return
+
+	targets = ["TS Token", "TS Gate Entry", "Purchase Receipt", "Purchase Invoice"]
+	changed = False
+	for dt in targets:
+		cf_name = frappe.db.get_value(
+			"Custom Field", {"dt": dt, "fieldname": "vehicle_origin"}, "name"
+		)
+		if not cf_name:
+			continue
+		cf = frappe.get_doc("Custom Field", cf_name)
+		if cf.fieldtype == "Link" and cf.options == "TS Vehicle Origin":
+			continue
+		cf.fieldtype = "Link"
+		cf.options = "TS Vehicle Origin"
+		cf.length = 0
+		cf.flags.ignore_links = True
+		cf.save(ignore_permissions=True)
+		changed = True
+
+	if changed:
+		# Lesson 263 — bump doctype.modified to invalidate browser form-meta cache
+		now = frappe.utils.now()
+		for dt in targets:
+			frappe.db.set_value("DocType", dt, "modified", now, update_modified=False)
+		for dt in targets:
+			frappe.db.updatedb(dt)
+		frappe.db.commit()
+
+
+def _hide_legacy_g1_custom_fields():
+	"""v2.9.18 — Hide legacy free-text G1 driver/operator Custom Fields on existing installs.
+
+	Fresh installs already get hidden=1 via the specs in `custom_fields["TS Token"]`
+	and `custom_fields["TS Gate Entry"]`. This migration covers existing prod data
+	where the fields were created visible. Idempotent — skips fields already hidden.
+	"""
+	legacy = [
+		("TS Token", "ts_driver_name_g1"),
+		("TS Token", "ts_driver_license_g1"),
+		("TS Token", "ts_driver_mobile_g1"),
+		("TS Token", "ts_g1_operator_name"),
+		("TS Gate Entry", "ts_g1_driver_name"),
+		("TS Gate Entry", "ts_g1_driver_license"),
+		("TS Gate Entry", "ts_g1_driver_mobile"),
+	]
+	changed_dts = set()
+	for dt, fieldname in legacy:
+		cf_name = frappe.db.get_value(
+			"Custom Field", {"dt": dt, "fieldname": fieldname}, "name"
+		)
+		if not cf_name:
+			continue
+		if frappe.db.get_value("Custom Field", cf_name, "hidden") == 1:
+			continue
+		frappe.db.set_value("Custom Field", cf_name, "hidden", 1)
+		changed_dts.add(dt)
+
+	if changed_dts:
+		now = frappe.utils.now()
+		for dt in changed_dts:
+			frappe.db.set_value("DocType", dt, "modified", now, update_modified=False)
+		frappe.db.commit()
 
 
 def _seed_pi_update_stock_return_visibility():
