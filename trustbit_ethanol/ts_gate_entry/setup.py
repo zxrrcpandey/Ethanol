@@ -2508,36 +2508,44 @@ def _migrate_vehicle_origin_data_to_link():
 
 	Idempotent — skips fields already Link. MUST run AFTER _backfill_vehicle_origin_master
 	so existing column values reference real Master records.
+
+	Note: Frappe's Custom Field validator blocks Data→Link via doc.save() (raises
+	"Fieldtype cannot be changed from Data to Link"). We bypass it with direct SQL
+	on tabCustom Field — the underlying column is varchar in both cases, so the
+	on-disk schema is unchanged; only the metadata flag flips. Lesson 263 modified-
+	bump still applied so the browser form-meta cache invalidates.
 	"""
 	if not frappe.db.exists("DocType", "TS Vehicle Origin"):
 		return
 
 	targets = ["TS Token", "TS Gate Entry", "Purchase Receipt", "Purchase Invoice"]
-	changed = False
+	changed_dts = []
 	for dt in targets:
-		cf_name = frappe.db.get_value(
-			"Custom Field", {"dt": dt, "fieldname": "vehicle_origin"}, "name"
+		cf = frappe.db.get_value(
+			"Custom Field", {"dt": dt, "fieldname": "vehicle_origin"},
+			["name", "fieldtype", "options"], as_dict=True
 		)
-		if not cf_name:
+		if not cf:
 			continue
-		cf = frappe.get_doc("Custom Field", cf_name)
 		if cf.fieldtype == "Link" and cf.options == "TS Vehicle Origin":
 			continue
-		cf.fieldtype = "Link"
-		cf.options = "TS Vehicle Origin"
-		cf.length = 0
-		cf.flags.ignore_links = True
-		cf.save(ignore_permissions=True)
-		changed = True
-
-	if changed:
-		# Lesson 263 — bump doctype.modified to invalidate browser form-meta cache
 		now = frappe.utils.now()
-		for dt in targets:
+		frappe.db.sql(
+			"""UPDATE `tabCustom Field`
+			   SET fieldtype=%s, options=%s, length=0, modified=%s
+			   WHERE name=%s""",
+			("Link", "TS Vehicle Origin", now, cf.name),
+		)
+		changed_dts.append(dt)
+
+	if changed_dts:
+		now = frappe.utils.now()
+		for dt in changed_dts:
+			# Lesson 263 — bump DocType.modified to invalidate browser form-meta cache
 			frappe.db.set_value("DocType", dt, "modified", now, update_modified=False)
-		for dt in targets:
-			frappe.db.updatedb(dt)
+		# No frappe.db.updatedb needed — column stays varchar; only metadata flips
 		frappe.db.commit()
+		frappe.clear_cache()
 
 
 def _hide_legacy_g1_custom_fields():
